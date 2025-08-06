@@ -1,0 +1,32 @@
+﻿namespace DidactEngine.Services.BackgroundServices
+{
+    public class FlowRepositoryBackgroundService : BackgroundService
+    {
+        private readonly ILogger<FlowRepositoryBackgroundService> _logger;
+
+        public FlowRepositoryBackgroundService(ILogger<FlowRepositoryBackgroundService> logger)
+        {
+            _logger = logger;
+        }
+
+        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+        {
+            _logger.LogInformation("Starting {name}...", nameof(FlowRepositoryBackgroundService));
+
+            try
+            {
+                while (!stoppingToken.IsCancellationRequested)
+                {
+                    _logger.LogInformation("Ping from the {name}.", nameof(FlowRepositoryBackgroundService));
+                    await Task.Delay(5000);
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogCritical("{name} failed with the following exception:{nl}{exception}",
+                    nameof(FlowRepositoryBackgroundService), Environment.NewLine, ex);
+                throw;
+            }
+        }
+    }
+}
