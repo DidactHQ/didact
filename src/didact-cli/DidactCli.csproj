@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+	<PublishSingleFile>true</PublishSingleFile>
+	<SelfContained>true</SelfContained>
+	<IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+	<PublishTrimmed>false</PublishTrimmed> <!-- Avoid trimming to ensure all dependencies are included -->
+	<EnableCompressionInSingleFile>true</EnableCompressionInSingleFile> <!-- Optional: Compress output -->
+	<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies> <!-- Ensure all NuGet assemblies are included -->
+  </PropertyGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="appsettings.json" />
+	<EmbeddedResource Include="appsettings.Development.json" />
+	<EmbeddedResource Include="appsettings.Staging.json" />
+	<EmbeddedResource Include="appsettings.Production.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.1" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="9.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="9.0.1" />
+    <PackageReference Include="Spectre.Console" Version="0.49.1" />
+    <PackageReference Include="Spectre.Console.Cli" Version="0.49.1" />
+  </ItemGroup>
+
+</Project>
