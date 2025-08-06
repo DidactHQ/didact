@@ -1,0 +1,6 @@
+@DidactUi_HostAddress = http://localhost:5289
+
+GET {{DidactUi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
