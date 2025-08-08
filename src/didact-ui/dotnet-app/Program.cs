@@ -1,4 +1,4 @@
-using DidactServices;
+using DidactServices.Constants;
 using DidactServices.Environments;
 using DidactUi.Constants;
 using DidactUi.Exceptions;
