@@ -10,6 +10,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DidactUi", "didact-ui\dotne
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DidactCore", "didact-core\DidactCore.csproj", "{41E0D8C9-8D73-4660-97D8-0FD4CEE4966D}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DidactServices", "didact-services\DidactServices.csproj", "{66E3BBF5-252F-45C5-8987-4C9F25522CEF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,6 +34,10 @@ Global
 		{41E0D8C9-8D73-4660-97D8-0FD4CEE4966D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{41E0D8C9-8D73-4660-97D8-0FD4CEE4966D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{41E0D8C9-8D73-4660-97D8-0FD4CEE4966D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66E3BBF5-252F-45C5-8987-4C9F25522CEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66E3BBF5-252F-45C5-8987-4C9F25522CEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66E3BBF5-252F-45C5-8987-4C9F25522CEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66E3BBF5-252F-45C5-8987-4C9F25522CEF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
