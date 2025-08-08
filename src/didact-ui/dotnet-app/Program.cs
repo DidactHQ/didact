@@ -1,3 +1,5 @@
+using DidactServices;
+using DidactServices.Environments;
 using DidactUi.Exceptions;
 using DidactUi.Services;
 using Microsoft.Extensions.FileProviders;
@@ -7,12 +9,22 @@ using System.Reflection;
 
 #region App metadata
 
-var applicationName = "Didact UI";
+var applicationName = Constants.ApplicationNames.DidactUi;
 var themeColor = new Color(249, 115, 22);
 var assembly = Assembly.GetExecutingAssembly();
 var assemblyName = assembly.GetName().Name;
-var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
-var settingsFilename = "uisettings.json";
+
+/* There is a distinction between the normal dotnet environment designation and the Didact build environment.
+ * If the build environment is Production, then we assume this app is a tested and released version,
+ * meaning end users should ONLY use production settings for Didact Platform.
+ * However, if the build environment is NOT Production, then we assume this app is currently under development by Didact's maintainer,
+ * meaning that we DO want to use the Development or Staging environment settings.
+ */
+var buildEnvironment = EnvironmentService.GetBuildEnvironment();
+var hostAppEnvironment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+var appsettingsEnvironment = EnvironmentService.GetDynamicHostAppEnvironment(buildEnvironment, hostAppEnvironment);
+
+var settingsFilename = Constants.ApplicationConfigurationFileNames.DidactUiSettings;
 var urls = Environment.GetEnvironmentVariable("ASPNETCORE_URLS");
 var urlsSplit = string.IsNullOrEmpty(urls) ? [] : urls.Split(';');
 var consoleUrls = string.Empty;
@@ -40,7 +52,8 @@ table.AddRow("Process Id", Environment.ProcessId.ToString());
 table.AddRow("OS version", Environment.OSVersion.ToString());
 table.AddRow("Machine name", Environment.MachineName);
 table.AddRow("Username", Environment.UserName);
-table.AddRow("Environment", environment ?? string.Empty);
+table.AddRow("Build Environment", buildEnvironment);
+table.AddRow("Environment", hostAppEnvironment ?? string.Empty);
 if (!string.IsNullOrEmpty(consoleUrls))
     table.AddRow("Dashboard", consoleUrls);
 table.BorderStyle(new Style(themeColor));
@@ -60,9 +73,9 @@ var builder = WebApplication.CreateBuilder(args);
 #region Read appsettings.json as an embedded resource.
 
 // Support multi-environment appsettings files.
-var resourceFileName = string.IsNullOrEmpty(environment)
+var resourceFileName = string.IsNullOrEmpty(appsettingsEnvironment)
     ? $"{assemblyName}.appsettings.json"
-    : $"{assemblyName}.appsettings.{environment}.json";
+    : $"{assemblyName}.appsettings.{appsettingsEnvironment}.json";
 
 // Fetch the appsettings.json file as an embedded resource.
 var stream = assembly.GetManifestResourceStream(resourceFileName);
