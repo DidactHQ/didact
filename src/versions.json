@@ -1,0 +1,13 @@
+{
+  "$schema": "https://console.didact.dev/schema/versions.json",
+  "platform": {
+    "version": "v0",
+    "componentVersions": {
+      "ui": "v0",
+      "engine": "v0",
+      "cli": "v0",
+      "core": "v0"
+    },
+    "componentVersionsHash": ""
+  }
+}
