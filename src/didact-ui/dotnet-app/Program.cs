@@ -1,5 +1,6 @@
 using DidactServices;
 using DidactServices.Environments;
+using DidactUi.Constants;
 using DidactUi.Exceptions;
 using DidactUi.Services;
 using Microsoft.Extensions.FileProviders;
@@ -112,10 +113,9 @@ builder.Services.AddSingleton(uiSettings);
 
 #region Add CORS policy for local dev only for the Nuxt dev server.
 
-var developmentCorsName = "DevelopmentCORS";
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy(name: developmentCorsName,
+    options.AddPolicy(name: UiConstants.CorsPolicyNames.Development,
         policy =>
         {
             // Get the Nuxt dev server base url.
@@ -147,7 +147,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
     // Add CORS policy for local dev only for the Nuxt dev server.
-    app.UseCors(developmentCorsName);
+    app.UseCors(UiConstants.CorsPolicyNames.Development);
 }
 
 app.UseHttpsRedirection();
