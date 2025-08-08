@@ -1,4 +1,4 @@
-﻿namespace DidactServices
+﻿namespace DidactServices.Constants
 {
     public static class Constants
     {
