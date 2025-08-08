@@ -2,6 +2,8 @@
 {
     public static class EngineConstants
     {
+        public const string ApiBasePath = "/api";
+
         public static class CorsPolicyNames
         {
             public const string Development = "DevelopmentCors";
