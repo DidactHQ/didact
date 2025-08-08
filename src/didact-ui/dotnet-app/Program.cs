@@ -47,12 +47,12 @@ table.AddColumn("");
 table.AddColumn(new TableColumn(""));
 table.AddRow("Name", applicationName);
 table.AddRow("Version", assembly.GetName().Version!.ToString());
+table.AddRow("Build Environment", buildEnvironment);
 table.AddRow("Start time", DateTime.UtcNow.ToString("O"));
 table.AddRow("Process Id", Environment.ProcessId.ToString());
 table.AddRow("OS version", Environment.OSVersion.ToString());
 table.AddRow("Machine name", Environment.MachineName);
 table.AddRow("Username", Environment.UserName);
-table.AddRow("Build Environment", buildEnvironment);
 table.AddRow("Environment", hostAppEnvironment ?? string.Empty);
 if (!string.IsNullOrEmpty(consoleUrls))
     table.AddRow("Dashboard", consoleUrls);
