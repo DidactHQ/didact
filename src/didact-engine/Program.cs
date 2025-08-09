@@ -196,30 +196,3 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
-
-//var logger = app.Services.GetRequiredService<ILogger<Program>>();
-
-//try
-//{
-//    using (var scope = app.Services.CreateScope())
-//    using (var dbContext = scope.ServiceProvider.GetRequiredService<DidactDbContext>())
-//    try
-//    {
-//        logger.LogInformation("Attempting to migrate the database on engine startup...");
-//        dbContext.Database.Migrate();
-//        logger.LogInformation("Database migrated successfully.");
-//    }
-//    catch (Exception ex)
-//    {
-//        logger.LogError(ex, "Unhandled exception while applying migrations for {T}", typeof(DidactDbContext));
-//        throw;
-//    }
-
-//    app.Run();
-//    return 0;
-//}
-//catch (Exception ex)
-//{
-//    logger.LogCritical(ex, "An unhandled exception occurred during bootstrapping");
-//    return 1;
-//}
