@@ -1,5 +1,7 @@
 ﻿namespace DidactServices.Environments
 {
+    using DidactServices.Constants;
+
     public class EnvironmentService
     {
         public EnvironmentService() { }
