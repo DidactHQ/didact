@@ -1,6 +1,8 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using DidactCli.Commands;
 using DidactCli.Services;
+using DidactServices.Constants;
+using DidactServices.Environments;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -8,20 +10,61 @@ using Spectre.Console;
 using Spectre.Console.Cli;
 using System.Reflection;
 
-AnsiConsole.Write(
-    new FigletText("Didact Cli")
-        .LeftJustified()
-        .Color(Color.Orange1));
+#region App metadata
 
-#region Setup and bind the appsettings.
-
+var applicationName = Constants.ApplicationNames.DidactCli;
+var themeColor = new Color(249, 115, 22);
 var assembly = Assembly.GetExecutingAssembly();
 var assemblyName = assembly.GetName().Name;
-var environment = Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT");
+
+/* There is a distinction between the normal dotnet environment designation and the Didact build environment.
+ * If the build environment is Production, then we assume this app is a tested and released version,
+ * meaning end users should ONLY use production settings for Didact Platform.
+ * However, if the build environment is NOT Production, then we assume this app is currently under development by Didact's maintainer,
+ * meaning that we DO want to use the Development or Staging environment settings.
+ */
+var buildEnvironment = EnvironmentService.GetBuildEnvironment();
+var hostAppEnvironment = Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT");
+var appsettingsEnvironment = EnvironmentService.GetDynamicHostAppEnvironment(buildEnvironment, hostAppEnvironment);
+
+#endregion
+
+#region Configure Spectre Console decorator.
+
+var figletText = new FigletText(applicationName).LeftJustified().Color(themeColor);
+AnsiConsole.Write(figletText);
+
+// Create a table
+var table = new Table().HideHeaders();
+table.AddColumn("");
+table.AddColumn(new TableColumn(""));
+table.AddRow("Name", applicationName);
+table.AddRow("Version", assembly.GetName().Version!.ToString());
+table.AddRow("Build Environment", buildEnvironment);
+table.AddRow("Start time", DateTime.UtcNow.ToString("O"));
+table.AddRow("Process Id", Environment.ProcessId.ToString());
+table.AddRow("OS version", Environment.OSVersion.ToString());
+table.AddRow("Machine name", Environment.MachineName);
+table.AddRow("Username", Environment.UserName);
+table.AddRow("Environment", hostAppEnvironment ?? string.Empty);
+table.BorderStyle(new Style(themeColor));
+
+var padder = new Padder(table).PadBottom(1).PadTop(0);
+
+var grid = new Grid();
+grid.AddColumn();
+grid.AddRow(padder);
+
+AnsiConsole.Write(grid);
+
+#endregion
+
+#region Read appsettings.json as an embedded resource.
+
 // Support multi-environment appsettings files.
-var resourceFileName = string.IsNullOrEmpty(environment)
+var resourceFileName = string.IsNullOrEmpty(appsettingsEnvironment)
     ? $"{assemblyName}.appsettings.json"
-    : $"{assemblyName}.appsettings.{environment}.json";
+    : $"{assemblyName}.appsettings.{appsettingsEnvironment}.json";
 
 // Fetch the appsettings.json file as an embedded resource.
 var stream = assembly.GetManifestResourceStream(resourceFileName);
@@ -33,13 +76,13 @@ var iConfiguration = new ConfigurationBuilder()
     .AddJsonStream(new MemoryStream(System.Text.Encoding.UTF8.GetBytes(json)))
     .Build();
 
-// Bind to the appsettings class.
-var appSettings = new AppSettings();
-iConfiguration.Bind(appSettings);
-
 #endregion
 
 #region Setup dependency injection and other bootstrapping utilities.
+
+// Bind to the appsettings class.
+var appSettings = new AppSettings();
+iConfiguration.Bind(appSettings);
 
 var services = new ServiceCollection();
 services.AddSingleton<IConfiguration>(iConfiguration);
