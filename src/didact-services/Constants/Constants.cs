@@ -31,5 +31,11 @@
             public const string Staging = "Staging";
             public const string Production = "Production";
         }
+
+        public static class DatabaseProviders
+        {
+            public const string SqlServer = "SqlServer";
+            public const string Postgres = "Postgres";
+        }
     }
 }
