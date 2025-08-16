@@ -46,6 +46,7 @@
   </ItemGroup>
 	
   <ItemGroup>
+    <ProjectReference Include="..\didact-core\DidactCore.csproj" />
     <ProjectReference Include="..\didact-services\DidactServices.csproj" />
   </ItemGroup>
 
