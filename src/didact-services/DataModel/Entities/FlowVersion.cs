@@ -1,15 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DidactCore.Entities
+namespace DidactServices.DataModel.Entities
 {
-    public class TriggerType
+    public class FlowVersion
     {
-        public int TriggerTypeId { get; set; }
+        public long FlowVersionId { get; set; }
 
-        public string Name { get; set; } = null!;
+        public long FlowId { get; set; }
 
-        public string Description { get; set; } = null!;
+        public long EnvironmentId { get; set; }
+
+        public string Version { get; set; } = null!;
 
         public DateTime Created { get; set; }
 
@@ -22,6 +24,10 @@ namespace DidactCore.Entities
         public bool Active { get; set; }
 
         public byte[] RowVersion { get; set; } = null!;
+
+        public virtual Flow Flow { get; set; } = null!;
+
+        public virtual Environment Environment { get; set; } = null!;
 
         public virtual ICollection<FlowRun> FlowRuns { get; } = new List<FlowRun>();
     }

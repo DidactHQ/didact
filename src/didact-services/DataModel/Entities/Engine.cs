@@ -1,14 +1,20 @@
 ﻿using System;
 
-namespace DidactCore.Entities
+namespace DidactServices.DataModel.Entities
 {
-    public class Environment
+    public class Engine
     {
+        public long EngineId { get; set; }
+
         public long EnvironmentId { get; set; }
 
-        public int OrganizationId { get; set; }
+        public string UniqueName { get; set; } = null!;
 
-        public string Name { get; set; } = null!;
+        public string? Name { get; set; }
+
+        public int? LatestProcessId { get; set; }
+
+        public DateTime LastHeartbeat { get; set; }
 
         public string? Description { get; set; }
 
@@ -23,5 +29,7 @@ namespace DidactCore.Entities
         public bool Active { get; set; }
 
         public byte[] RowVersion { get; set; } = null!;
+
+        public virtual Environment Environment { get; set; } = null!;
     }
 }

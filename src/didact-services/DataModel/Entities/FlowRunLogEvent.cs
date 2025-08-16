@@ -1,16 +1,20 @@
 ﻿using System;
 
-namespace DidactCore.Entities
+namespace DidactServices.DataModel.Entities
 {
-    public class StrictQueueItem
+    public class FlowRunLogEvent
     {
-        public long StrictQueueItemId { get; set; }
+        public long FlowRunLogEventId { get; set; }
+
+        public long FlowRunEventId { get; set; }
 
         public long EnvironmentId { get; set; }
 
-        public int StrictQueueId { get; set; }
+        public string LogLevel { get; set; } = null!;
 
-        public long FlowRunId { get; set; }
+        public string Message { get; set; } = null!;
+
+        public DateTime Timestamp { get; set; }
 
         public DateTime Created { get; set; }
 
@@ -22,10 +26,8 @@ namespace DidactCore.Entities
 
         public byte[] RowVersion { get; set; } = null!;
 
-        public virtual StrictQueue StrictQueue { get; set; } = null!;
+        public virtual FlowRunEvent FlowRunEvent { get; set; } = null!;
 
         public virtual Environment Environment { get; set; } = null!;
-
-        public virtual FlowRun FlowRun { get; set; } = null!;
     }
 }

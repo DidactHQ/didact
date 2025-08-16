@@ -1,14 +1,16 @@
 ﻿using System;
 
-namespace DidactCore.Entities
+namespace DidactServices.DataModel.Entities
 {
-    public class ScheduleType
+    public class LibraryVersion
     {
-        public int ScheduleTypeId { get; set; }
+        public long LibraryVersionId { get; set; }
 
-        public string Name { get; set; } = null!;
+        public long LibraryId { get; set; }
 
-        public string Description { get; set; } = null!;
+        public long EnvironmentId { get; set; }
+
+        public string AssemblyVersion { get; set; } = null!;
 
         public DateTime Created { get; set; }
 

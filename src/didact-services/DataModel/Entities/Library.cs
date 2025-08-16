@@ -1,14 +1,14 @@
 ﻿using System;
 
-namespace DidactCore.Entities
+namespace DidactServices.DataModel.Entities
 {
-    public class LibraryDeploymentType
+    public class Library
     {
-        public int LibraryDeploymentTypeId { get; set; }
+        public long LibraryId { get; set; }
 
-        public string Name { get; set; } = null!;
+        public long EnvironmentId { get; set; }
 
-        public string Description { get; set; } = null!;
+        public string AssemblyName { get; set; } = null!;
 
         public DateTime Created { get; set; }
 

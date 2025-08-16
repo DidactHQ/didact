@@ -1,16 +1,14 @@
 ﻿using System;
 
-namespace DidactCore.Entities
+namespace DidactServices.DataModel.Entities
 {
-    public class LibraryVersion
+    public class TriggerScope
     {
-        public long LibraryVersionId { get; set; }
+        public int TriggerScopeId { get; set; }
 
-        public long LibraryId { get; set; }
+        public string Name { get; set; } = null!;
 
-        public long EnvironmentId { get; set; }
-
-        public string AssemblyVersion { get; set; } = null!;
+        public string Description { get; set; } = null!;
 
         public DateTime Created { get; set; }
 

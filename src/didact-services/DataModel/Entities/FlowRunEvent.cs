@@ -1,20 +1,18 @@
 ﻿using System;
 
-namespace DidactCore.Entities
+namespace DidactServices.DataModel.Entities
 {
-    public class FlowRunLogEvent
+    public class FlowRunEvent
     {
-        public long FlowRunLogEventId { get; set; }
-
         public long FlowRunEventId { get; set; }
+
+        public long FlowRunId { get; set; }
+
+        public int FlowRunEventTypeId { get; set; }
 
         public long EnvironmentId { get; set; }
 
-        public string LogLevel { get; set; } = null!;
-
-        public string Message { get; set; } = null!;
-
-        public DateTime Timestamp { get; set; }
+        public DateTime OccurredAt { get; set; }
 
         public DateTime Created { get; set; }
 
@@ -26,7 +24,9 @@ namespace DidactCore.Entities
 
         public byte[] RowVersion { get; set; } = null!;
 
-        public virtual FlowRunEvent FlowRunEvent { get; set; } = null!;
+        public virtual FlowRun FlowRun { get; set; } = null!;
+
+        public virtual FlowRunEventType FlowRunEventType { get; set; } = null!;
 
         public virtual Environment Environment { get; set; } = null!;
     }

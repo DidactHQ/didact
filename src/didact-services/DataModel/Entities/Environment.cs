@@ -1,14 +1,16 @@
 ﻿using System;
 
-namespace DidactCore.Entities
+namespace DidactServices.DataModel.Entities
 {
-    public class CronScheduleTrigger
+    public class Environment
     {
-        public long CronScheduleTriggerId { get; set; }
+        public long EnvironmentId { get; set; }
 
-        public long TriggerId { get; set; }
+        public int OrganizationId { get; set; }
 
-        public string CronExpression { get; set; } = null!;
+        public string Name { get; set; } = null!;
+
+        public string? Description { get; set; }
 
         public DateTime Created { get; set; }
 

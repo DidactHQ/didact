@@ -1,14 +1,14 @@
 ﻿using System;
 
-namespace DidactCore.Entities
+namespace DidactServices.DataModel.Entities
 {
-    public class FlowRunEventType
+    public class ExecutionVersion
     {
-        public int FlowRunEventTypeId { get; set; }
+        public long ExecutionVersionId { get; set; }
 
-        public string Name { get; set; } = null!;
+        public long LibraryVersionId { get; set; }
 
-        public string Description { get; set; } = null!;
+        public long FlowVersionId { get; set; }
 
         public DateTime Created { get; set; }
 

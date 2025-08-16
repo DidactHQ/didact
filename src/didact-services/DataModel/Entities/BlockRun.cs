@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DidactCore.Entities
+namespace DidactServices.DataModel.Entities
 {
     public class BlockRun
     {

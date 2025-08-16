@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 
-namespace DidactCore.Entities
+namespace DidactServices.DataModel.Entities
 {
-    public class TriggerScope
+    public class TriggerType
     {
-        public int TriggerScopeId { get; set; }
+        public int TriggerTypeId { get; set; }
 
         public string Name { get; set; } = null!;
 
@@ -21,5 +22,7 @@ namespace DidactCore.Entities
         public bool Active { get; set; }
 
         public byte[] RowVersion { get; set; } = null!;
+
+        public virtual ICollection<FlowRun> FlowRuns { get; } = new List<FlowRun>();
     }
 }

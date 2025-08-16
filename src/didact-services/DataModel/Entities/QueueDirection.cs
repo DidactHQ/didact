@@ -1,16 +1,14 @@
 ﻿using System;
 
-namespace DidactCore.Entities
+namespace DidactServices.DataModel.Entities
 {
-    public class LibraryDeploymentLocalFileSystem
+    public class QueueDirection
     {
-        public long LibraryDeploymentLocalFileSystemId { get; set; }
+        public int QueueDirectionId { get; set; }
 
-        public long LibraryDeploymentId { get; set; }
+        public string Name { get; set; } = null!;
 
-        public long EnvironmentId { get; set; }
-
-        public string FolderPath { get; set; } = null!;
+        public string Description { get; set; } = null!;
 
         public DateTime Created { get; set; }
 

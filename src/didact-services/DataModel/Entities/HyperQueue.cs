@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DidactCore.Entities
+namespace DidactServices.DataModel.Entities
 {
-    public class StrictQueue
+    public class HyperQueue
     {
-        public int StrictQueueId { get; set; }
+        public int HyperQueueId { get; set; }
 
         public int QueueDirectionId { get; set; }
 
@@ -31,6 +31,6 @@ namespace DidactCore.Entities
 
         public virtual Environment Environment { get; set; } = null!;
 
-        public virtual ICollection<StrictQueueItem> StrictQueueItems { get; } = new List<StrictQueueItem>();
+        public virtual ICollection<HyperQueueItem> HyperQueueItems { get; } = new List<HyperQueueItem>();
     }
 }

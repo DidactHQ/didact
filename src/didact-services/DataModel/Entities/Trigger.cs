@@ -1,16 +1,20 @@
 ﻿using System;
 
-namespace DidactCore.Entities
+namespace DidactServices.DataModel.Entities
 {
-    public class LibraryDeployment
+    public class Trigger
     {
-        public long LibraryDeploymentId { get; set; }
+        public long TriggerId { get; set; }
 
-        public int LibraryDeploymentTypeId { get; set; }
+        public int TriggerTypeId {  get; set; }
 
-        public long LibraryId { get; set; }
+        public int TriggerScopeId { get; set; }
 
-        public long EnvironmentId { get; set; }
+        public int? OrganizationId { get; set; }
+
+        public long? EnvironmentId { get; set; }
+
+        public long? FlowId { get; set; }
 
         public string? Name { get; set; }
 

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DidactCore.Entities
+namespace DidactServices.DataModel.Entities
 {
     public class Organization
     {

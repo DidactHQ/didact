@@ -1,15 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 
-namespace DidactCore.Entities
+namespace DidactServices.DataModel.Entities
 {
-    public class ExecutionMode
+    public class LibraryDeploymentType
     {
-        public int ExecutionModeId { get; set; }
+        public int LibraryDeploymentTypeId { get; set; }
 
         public string Name { get; set; } = null!;
 
-        public string? Description { get; set; }
+        public string Description { get; set; } = null!;
 
         public DateTime Created { get; set; }
 
@@ -22,9 +21,5 @@ namespace DidactCore.Entities
         public bool Active { get; set; }
 
         public byte[] RowVersion { get; set; } = null!;
-
-        public virtual ICollection<Flow> Flows { get; } = new List<Flow>();
-
-        public virtual ICollection<FlowRun> FlowRuns { get; } = new List<FlowRun>();
     }
 }

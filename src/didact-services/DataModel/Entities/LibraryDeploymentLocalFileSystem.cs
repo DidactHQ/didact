@@ -1,18 +1,16 @@
 ﻿using System;
 
-namespace DidactCore.Entities
+namespace DidactServices.DataModel.Entities
 {
-    public class FlowRunStateChangeEvent
+    public class LibraryDeploymentLocalFileSystem
     {
-        public long FlowRunStateChangeEventId { get; set; }
+        public long LibraryDeploymentLocalFileSystemId { get; set; }
 
-        public long FlowRunEventId { get; set; }
+        public long LibraryDeploymentId { get; set; }
 
         public long EnvironmentId { get; set; }
 
-        public string PreviousState { get; set; } = null!;
-
-        public string NewState { get; set; } = null!;
+        public string FolderPath { get; set; } = null!;
 
         public DateTime Created { get; set; }
 
