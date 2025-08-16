@@ -1,15 +1,15 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
-using DidactCore.Entities;
+using DidactServices.DataModel.Entities;
 
 namespace DidactEngine.Services.Contexts.Configurations
 {
-    public partial class StateConfiguration : IEntityTypeConfiguration<State>
+    public partial class FlowScheduleConfiguration : IEntityTypeConfiguration<FlowSchedule>
     {
-        public void Configure(EntityTypeBuilder<State> entity)
+        public void Configure(EntityTypeBuilder<FlowSchedule> entity)
         {
-            //entity.ToTable(nameof(State));
-            //entity.Property(e => e.Name).IsRequired().HasMaxLength(255);
+            //entity.ToTable(nameof(FlowSchedule));
+            //entity.Property(e => e.CronExpression).IsRequired().HasMaxLength(255);
             //entity.Property(e => e.CreatedBy).HasMaxLength(255);
             //entity.Property(e => e.LastUpdatedBy).HasMaxLength(255);
             //entity.Property(e => e.Active).IsRequired().HasDefaultValue(true);
@@ -18,6 +18,6 @@ namespace DidactEngine.Services.Contexts.Configurations
             OnConfigurePartial(entity);
         }
 
-        partial void OnConfigurePartial(EntityTypeBuilder<State> entity);
+        partial void OnConfigurePartial(EntityTypeBuilder<FlowSchedule> entity);
     }
 }

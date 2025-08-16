@@ -1,14 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
-using DidactCore.Entities;
+using DidactServices.DataModel.Entities;
 
 namespace DidactEngine.Services.Contexts.Configurations
 {
-    public partial class TriggerTypeConfiguration : IEntityTypeConfiguration<TriggerType>
+    public partial class HyperQueueConfiguration : IEntityTypeConfiguration<HyperQueue>
     {
-        public void Configure(EntityTypeBuilder<TriggerType> entity)
+        public void Configure(EntityTypeBuilder<HyperQueue> entity)
         {
-            //entity.ToTable(nameof(TriggerType));
+            //entity.ToTable(nameof(HyperQueue));
             //entity.Property(e => e.Name).IsRequired().HasMaxLength(255);
             //entity.Property(e => e.CreatedBy).HasMaxLength(255);
             //entity.Property(e => e.LastUpdatedBy).HasMaxLength(255);
@@ -18,6 +18,6 @@ namespace DidactEngine.Services.Contexts.Configurations
             OnConfigurePartial(entity);
         }
 
-        partial void OnConfigurePartial(EntityTypeBuilder<TriggerType> entity);
+        partial void OnConfigurePartial(EntityTypeBuilder<HyperQueue> entity);
     }
 }

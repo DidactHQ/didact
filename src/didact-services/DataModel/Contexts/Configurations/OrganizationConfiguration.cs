@@ -1,14 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
-using DidactCore.Entities;
+using DidactServices.DataModel.Entities;
 
 namespace DidactEngine.Services.Contexts.Configurations
 {
-    public partial class HyperQueueConfiguration : IEntityTypeConfiguration<HyperQueue>
+    public partial class OrganizationConfiguration : IEntityTypeConfiguration<Organization>
     {
-        public void Configure(EntityTypeBuilder<HyperQueue> entity)
+        public void Configure(EntityTypeBuilder<Organization> entity)
         {
-            //entity.ToTable(nameof(HyperQueue));
+            //entity.ToTable(nameof(Organization));
             //entity.Property(e => e.Name).IsRequired().HasMaxLength(255);
             //entity.Property(e => e.CreatedBy).HasMaxLength(255);
             //entity.Property(e => e.LastUpdatedBy).HasMaxLength(255);
@@ -18,6 +18,6 @@ namespace DidactEngine.Services.Contexts.Configurations
             OnConfigurePartial(entity);
         }
 
-        partial void OnConfigurePartial(EntityTypeBuilder<HyperQueue> entity);
+        partial void OnConfigurePartial(EntityTypeBuilder<Organization> entity);
     }
 }
