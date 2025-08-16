@@ -1,16 +1,20 @@
 # Didact
-The open source, standalone, fullstack .NET job orchestrator that we've been missing.
+The .NET job orchestrator that we've been missing.
 
 ## About
 
-This repository will serve as the final release repository for Didact's multi-component backend.
+This is the monorepo for Didact and it's primary components, namely:
+- Didact CLI 
+- Didact Core
+- Didact Engine
+- Didact UI
 
-I will utilize the other, multiple repos for Didact's architecture as git submodules and reference them in this final repository.
+Originally, I had anticipated a polyrepo approach, but I have since decided against it. The older component repositories are archived, so please refer to this repository for the main platform components. I do still have some separate repositories such as the dedicated repository for the [Didact docsite](https://docs.didact.dev), please refer to the other repositories as necessary.
 
-For docker purposes, the final docker builds for Didact will take place from this repository.
+## Releases and Artifacts
 
-## Didact Repos
+This repository will contain the platform releases and release artifacts for Didact, namely, the application binaries/executables. The CI/CD automations will also produce the associated NuGet packages and Docker images from here.
 
-- [didact-engine](https://github.com/DidactHQ/didact-engine)
-- [didact-ui](https://github.com/DidactHQ/didact-ui)
-- [didact-core](https://github.com/DidactHQ/didact-core)
+## Documentation
+
+Rather than create complex README files, I prefer to keep these shorter for now and instead refer you to the [Didact docsite](https://docs.didact.dev) for learning the platform.
