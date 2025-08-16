@@ -15,13 +15,6 @@
 	<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
 	<GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
   </PropertyGroup>
-	
-  <ItemGroup>
-    <Compile Remove="Services\Migrations\**" />
-    <Content Remove="Services\Migrations\**" />
-    <EmbeddedResource Remove="Services\Migrations\**" />
-    <None Remove="Services\Migrations\**" />
-  </ItemGroup>
 
   <ItemGroup>
 	<EmbeddedResource Include="appsettings.json" />
