@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\didact-services\DidactServices.csproj" />
+    <ProjectReference Include="..\didact-primitives\DidactPrimitives.csproj" />
   </ItemGroup>
 
 </Project>
