@@ -1,5 +1,5 @@
 using DidactServices.Constants;
-using DidactServices.Environments;
+using DidactServices.HostAppEnvironments;
 using DidactUi.Constants;
 using DidactUi.Exceptions;
 using DidactUi.Services;
@@ -21,9 +21,9 @@ var assemblyName = assembly.GetName().Name;
  * However, if the build environment is NOT Production, then we assume this app is currently under development by Didact's maintainer,
  * meaning that we DO want to use the Development or Staging environment settings.
  */
-var buildEnvironment = EnvironmentService.GetBuildEnvironment();
+var buildEnvironment = HostAppEnvironmentService.GetBuildEnvironment();
 var hostAppEnvironment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
-var appsettingsEnvironment = EnvironmentService.GetDynamicHostAppEnvironment(buildEnvironment, hostAppEnvironment);
+var appsettingsEnvironment = HostAppEnvironmentService.GetDynamicHostAppEnvironment(buildEnvironment, hostAppEnvironment);
 
 var settingsFilename = Constants.ApplicationConfigurationFileNames.DidactUiSettings;
 var urls = Environment.GetEnvironmentVariable("ASPNETCORE_URLS");

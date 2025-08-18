@@ -1,11 +1,11 @@
-﻿namespace DidactServices.Environments
+﻿namespace DidactServices.HostAppEnvironments
 {
     using DidactServices.Constants;
     using System;
 
-    public class EnvironmentService
+    public class HostAppEnvironmentService
     {
-        public EnvironmentService() { }
+        public HostAppEnvironmentService() { }
 
         /// <summary>
         /// Gets the Didact Build Environment and uses the default if one is not found.

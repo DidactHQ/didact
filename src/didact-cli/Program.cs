@@ -2,7 +2,7 @@
 using DidactCli.Commands;
 using DidactCli.Services;
 using DidactServices.Constants;
-using DidactServices.Environments;
+using DidactServices.HostAppEnvironments;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -23,9 +23,9 @@ var assemblyName = assembly.GetName().Name;
  * However, if the build environment is NOT Production, then we assume this app is currently under development by Didact's maintainer,
  * meaning that we DO want to use the Development or Staging environment settings.
  */
-var buildEnvironment = EnvironmentService.GetBuildEnvironment();
+var buildEnvironment = HostAppEnvironmentService.GetBuildEnvironment();
 var hostAppEnvironment = Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT");
-var appsettingsEnvironment = EnvironmentService.GetDynamicHostAppEnvironment(buildEnvironment, hostAppEnvironment);
+var appsettingsEnvironment = HostAppEnvironmentService.GetDynamicHostAppEnvironment(buildEnvironment, hostAppEnvironment);
 
 #endregion
 

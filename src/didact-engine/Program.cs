@@ -2,7 +2,7 @@ using DidactEngine.Constants;
 using DidactEngine.Services;
 using DidactServices.Constants;
 using DidactServices.DataModel.Contexts;
-using DidactServices.Environments;
+using DidactServices.HostAppEnvironments;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
@@ -24,9 +24,9 @@ var assemblyName = assembly.GetName().Name;
  * However, if the build environment is NOT Production, then we assume this app is currently under development by Didact's maintainer,
  * meaning that we DO want to use the Development or Staging environment settings.
  */
-var buildEnvironment = EnvironmentService.GetBuildEnvironment();
+var buildEnvironment = HostAppEnvironmentService.GetBuildEnvironment();
 var hostAppEnvironment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
-var appsettingsEnvironment = EnvironmentService.GetDynamicHostAppEnvironment(buildEnvironment, hostAppEnvironment);
+var appsettingsEnvironment = HostAppEnvironmentService.GetDynamicHostAppEnvironment(buildEnvironment, hostAppEnvironment);
 
 var settingsFilename = Constants.ApplicationConfigurationFileNames.DidactEngineSettings;
 var apiBasePath = EngineConstants.ApiBasePath;
