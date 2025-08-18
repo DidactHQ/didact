@@ -12,4 +12,8 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.8" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\didact-primitives\DidactPrimitives.csproj" />
+  </ItemGroup>
+
 </Project>
