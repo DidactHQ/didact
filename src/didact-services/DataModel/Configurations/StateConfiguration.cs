@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using DidactServices.DataModel.Entities;
 
-namespace DidactEngine.Services.Contexts.Configurations
+namespace DidactServices.DataModel.Configurations
 {
     public partial class StateConfiguration : IEntityTypeConfiguration<State>
     {

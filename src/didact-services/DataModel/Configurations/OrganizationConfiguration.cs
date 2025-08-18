@@ -2,13 +2,13 @@
 using Microsoft.EntityFrameworkCore;
 using DidactServices.DataModel.Entities;
 
-namespace DidactEngine.Services.Contexts.Configurations
+namespace DidactServices.DataModel.Configurations
 {
-    public partial class TriggerTypeConfiguration : IEntityTypeConfiguration<TriggerType>
+    public partial class OrganizationConfiguration : IEntityTypeConfiguration<Organization>
     {
-        public void Configure(EntityTypeBuilder<TriggerType> entity)
+        public void Configure(EntityTypeBuilder<Organization> entity)
         {
-            //entity.ToTable(nameof(TriggerType));
+            //entity.ToTable(nameof(Organization));
             //entity.Property(e => e.Name).IsRequired().HasMaxLength(255);
             //entity.Property(e => e.CreatedBy).HasMaxLength(255);
             //entity.Property(e => e.LastUpdatedBy).HasMaxLength(255);
@@ -18,6 +18,6 @@ namespace DidactEngine.Services.Contexts.Configurations
             OnConfigurePartial(entity);
         }
 
-        partial void OnConfigurePartial(EntityTypeBuilder<TriggerType> entity);
+        partial void OnConfigurePartial(EntityTypeBuilder<Organization> entity);
     }
 }

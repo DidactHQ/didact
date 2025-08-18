@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace DidactEngine.Services.Extensions
+namespace DidactServices.DataModel.Migrations
 {
     public static class MigrationExtensions
     {

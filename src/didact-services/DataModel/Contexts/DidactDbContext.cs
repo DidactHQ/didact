@@ -2,7 +2,7 @@
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 
-namespace DidactEngine.Services.Contexts
+namespace DidactServices.DataModel.Contexts
 {
     public partial class DidactDbContext : DbContext
     {

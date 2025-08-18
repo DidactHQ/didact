@@ -1,4 +1,4 @@
-﻿namespace DidactCore.Constants
+﻿namespace DidactPrimitives.Constants
 {
     public static class FlowRunEventTypes
     {
