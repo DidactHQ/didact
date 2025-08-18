@@ -1,4 +1,4 @@
-﻿namespace DidactEngine.Services
+﻿namespace DidactEngine.Engine
 {
     public class EngineSettings
     {
