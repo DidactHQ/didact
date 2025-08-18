@@ -1,6 +1,5 @@
 ﻿using DidactCore.Constants;
 using DidactCore.Triggers;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -35,7 +34,6 @@ namespace DidactCore.Flows
         /// <summary>
         /// The designated queue type that the Flow will execute against.
         /// </summary>
-        /// <see cref="QueueTypes.HyperQueue"/>
         string DefaultQueueType { get; }
 
         /// <summary>
