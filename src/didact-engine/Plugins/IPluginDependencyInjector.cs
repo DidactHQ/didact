@@ -1,7 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using System;
-
-namespace DidactCore.Plugins
+﻿namespace DidactEngine.Plugins
 {
     public interface IPluginDependencyInjector
     {
