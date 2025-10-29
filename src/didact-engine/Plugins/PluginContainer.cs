@@ -14,7 +14,9 @@ namespace DidactCore.Plugins
 
         public ICollection<PluginExecutionVersion> PluginExecutionVersions { get; set; } = [];
 
-        public DateTime PluginLoadedAt { get; set; }
+        public DateTime? PluginLoadedAt { get; set; }
+
+        public DateTime? LastExecution { get; set; }
 
         public IPluginDependencyInjector PluginDependencyInjector { get; set; }
 

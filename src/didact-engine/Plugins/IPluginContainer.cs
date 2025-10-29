@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Reflection;
-using System.Threading.Tasks;
+﻿using System.Reflection;
 
 namespace DidactCore.Plugins
 {
@@ -11,7 +8,9 @@ namespace DidactCore.Plugins
 
         ICollection<PluginExecutionVersion> PluginExecutionVersions { get; }
 
-        DateTime PluginLoadedAt { get; set; }
+        DateTime? PluginLoadedAt { get; set; }
+
+        DateTime? LastExecution { get; set; }
 
         IPluginDependencyInjector PluginDependencyInjector { get; set; }
 
