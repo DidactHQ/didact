@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace DidactCore.Plugins
+namespace DidactEngine.Plugins
 {
     public class PluginContainers : IPluginContainers
     {

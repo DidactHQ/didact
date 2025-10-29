@@ -1,12 +1,13 @@
 ﻿using DidactCore.Constants;
 using DidactCore.Flows;
+using DidactCore.Plugins;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 
-namespace DidactCore.Plugins
+namespace DidactEngine.Plugins
 {
     public class PluginContainer : IPluginContainer
     {

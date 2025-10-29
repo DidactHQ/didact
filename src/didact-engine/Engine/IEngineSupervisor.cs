@@ -1,4 +1,4 @@
-﻿using DidactCore.Plugins;
+﻿using DidactEngine.Plugins;
 using System;
 using System.Threading;
 using System.Threading.Tasks;

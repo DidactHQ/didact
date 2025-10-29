@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DidactCore.Plugins
+namespace DidactEngine.Plugins
 {
     public interface IPluginContainers
     {

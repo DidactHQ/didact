@@ -3,7 +3,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using System;
 using System.Collections.Generic;
 
-namespace DidactCore.Plugins
+namespace DidactEngine.Plugins
 {
     public class PluginDependencyInjector : IPluginDependencyInjector
     {

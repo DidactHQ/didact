@@ -1,5 +1,5 @@
 ﻿using DidactCore.Engine;
-using DidactCore.Plugins;
+using DidactEngine.Plugins;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Linq;

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace DidactCore.Plugins
+namespace DidactEngine.Plugins
 {
     [Serializable]
     public class NoMatchedPluginException : Exception

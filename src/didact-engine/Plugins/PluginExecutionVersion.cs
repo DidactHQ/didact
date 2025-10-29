@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DidactCore.Plugins
+namespace DidactEngine.Plugins
 {
     public class PluginExecutionVersion
     {

@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace DidactCore.Plugins
+namespace DidactEngine.Plugins
 {
     public interface IPluginContainer
     {
@@ -15,7 +15,7 @@ namespace DidactCore.Plugins
         IPluginDependencyInjector PluginDependencyInjector { get; set; }
 
         /// <summary>
-        /// Gets an enumeration of the assemblies from the plugin container's <see cref="DidactCore.Plugins.PluginAssemblyLoadContext"/>.
+        /// Gets an enumeration of the assemblies from the plugin container's <see cref="Plugins.PluginAssemblyLoadContext"/>.
         /// </summary>
         /// <returns></returns>
         IEnumerable<Assembly> GetAssemblies();

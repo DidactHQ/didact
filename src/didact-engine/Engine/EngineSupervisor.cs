@@ -1,5 +1,5 @@
 ﻿using DidactCore.Constants;
-using DidactCore.Plugins;
+using DidactEngine.Plugins;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Diagnostics;
