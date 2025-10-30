@@ -10,7 +10,7 @@ namespace DidactEngine.Plugins
     {
         private readonly AssemblyDependencyResolver _resolver;
 
-        public PluginAssemblyLoadContext(string pluginPath)
+        public PluginAssemblyLoadContext(string pluginPath) : base(isCollectible: true)
         {
             _resolver = new AssemblyDependencyResolver(pluginPath);
         }
