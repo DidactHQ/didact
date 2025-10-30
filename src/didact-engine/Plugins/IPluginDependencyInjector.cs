@@ -3,12 +3,6 @@
     public interface IPluginDependencyInjector
     {
         /// <summary>
-        /// The original <see cref="IServiceCollection"/> from Didact Engine.
-        /// These services are automatically included in the <see cref="PluginServiceCollection"/>.
-        /// </summary>
-        IServiceCollection ApplicationServiceCollection { get; set; }
-
-        /// <summary>
         /// The <see cref="IServiceCollection"/> that contains all of the services from both Didact Engine and the Flow Library.
         /// </summary>
         IServiceCollection PluginServiceCollection { get; set; }
@@ -19,16 +13,16 @@
         IServiceProvider PluginServiceProvider { get; set; }
 
         /// <summary>
-        /// Clears the <see cref="PluginServiceCollection"/> and resets it to the <see cref="ApplicationServiceCollection"/>.
+        /// Clears the <see cref="PluginServiceCollection"/>.
         /// </summary>
-        void ResetServiceCollection();
+        void ClearServiceCollection();
 
         /// <summary>
         /// Adds each service from the plugin to the <see cref="PluginServiceCollection"/>
         /// and rebuilds the <see cref="PluginServiceProvider"/>.
         /// </summary>
         /// <param name="pluginServiceCollection"></param>
-        void AddAndRebuildServiceCollection(IServiceCollection pluginServiceCollection);
+        void BuildServiceCollection(IServiceCollection pluginServiceCollection);
 
         /// <summary>
         /// A wrapper function for the <see cref="ActivatorUtilities.CreateInstance{T}(IServiceProvider, object[])"/> method

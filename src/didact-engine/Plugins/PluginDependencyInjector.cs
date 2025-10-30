@@ -4,7 +4,7 @@ namespace DidactEngine.Plugins
 {
     public class PluginDependencyInjector : IPluginDependencyInjector
     {
-        public IServiceCollection ApplicationServiceCollection { get; set; }
+        private readonly IServiceCollection _applicationServiceCollection;
 
         public IServiceCollection PluginServiceCollection { get; set; }
 
@@ -12,19 +12,23 @@ namespace DidactEngine.Plugins
 
         public PluginDependencyInjector(IServiceCollection applicationServiceCollection)
         {
-            ApplicationServiceCollection = applicationServiceCollection;
-            PluginServiceCollection = applicationServiceCollection;
+            _applicationServiceCollection = applicationServiceCollection;
+            PluginServiceCollection = new ServiceCollection();
             PluginServiceProvider = PluginServiceCollection.BuildServiceProvider();
         }
 
-        public void ResetServiceCollection()
+        public void ClearServiceCollection()
         {
             PluginServiceCollection.Clear();
-            PluginServiceCollection = ApplicationServiceCollection;
         }
 
-        public void AddAndRebuildServiceCollection(IServiceCollection pluginServiceCollection)
+        public void BuildServiceCollection(IServiceCollection pluginServiceCollection)
         {
+            foreach (var service in _applicationServiceCollection)
+            {
+                PluginServiceCollection.TryAdd(service);
+            }
+
             foreach (var service in pluginServiceCollection)
             {
                 PluginServiceCollection.TryAdd(service);
