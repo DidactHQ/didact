@@ -5,9 +5,9 @@ namespace DidactCore.Plugins
     public interface IPluginRegistrar
     {
         /// <summary>
-        /// Creates a new <see cref="IServiceCollection"/> containing all dependencies self-registered in the plugin.
+        /// Registers plugin dependencies to be used in plugin-isolated dependency injection.
         /// </summary>
         /// <returns></returns>
-        IServiceCollection CreateServiceCollection();
+        IServiceCollection RegisterServices(IServiceCollection pluginServiceCollection);
     }
 }
