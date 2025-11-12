@@ -11,7 +11,7 @@ namespace DidactServices.DataModel.Entities
 
         public long TriggerId { get; set; }
 
-        public long ExecutionVersionId { get; set; }
+        public long FlowVersionId { get; set; }
 
         public long EnvironmentId { get; set; }
 
