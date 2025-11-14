@@ -7,5 +7,9 @@ namespace DidactCore.Flows
         string? StringifiedJsonInput { get; set; }
 
         CancellationToken CancellationToken { get; set; }
+
+        EnvironmentContext EnvironmentContext { get; set; }
+
+        DeploymentContext DeploymentContext { get; set; }
     }
 }
