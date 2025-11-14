@@ -23,13 +23,11 @@ namespace DidactServices.DataModel.Entities
 
         public string? JsonPayload { get; set; }
 
-        public DateTime? ExecuteAfter { get; set; }
-
         public int TimeoutSeconds { get; set; }
 
         public int StateId { get; set; }
 
-        public DateTime ProjectedStartTime { get; set; }
+        public DateTime? ExecuteAt { get; set; }
 
         public DateTime? ExecutionStarted { get; set; }
 
