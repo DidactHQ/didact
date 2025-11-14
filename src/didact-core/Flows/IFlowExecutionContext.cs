@@ -11,5 +11,9 @@ namespace DidactCore.Flows
         EnvironmentContext EnvironmentContext { get; set; }
 
         DeploymentContext DeploymentContext { get; set; }
+
+        FlowContext FlowContext { get; set; }
+
+        FlowRunContext FlowRunContext { get; set; }
     }
 }
