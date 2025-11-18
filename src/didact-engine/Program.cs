@@ -1,4 +1,5 @@
 using DidactEngine.Constants;
+using DidactEngine.Logging;
 using DidactEngine.Services;
 using DidactServices.Constants;
 using DidactServices.DataModel.Contexts;
@@ -180,6 +181,12 @@ builder.Services.AddEndpointsApiExplorer();
 //builder.Services.AddSingleton<IFlowExecutor, FlowExecutor>();
 // Register repositories from DidactCore.
 //builder.Services.AddScoped<IFlowRepository>();
+
+// Register logging services.
+builder.Services.AddSingleton<EngineLogChannel>();
+builder.Services.AddHostedService<EngineLoggerBackgroundService>();
+builder.Services.AddSingleton<FlowRunLogChannel>();
+builder.Services.AddHostedService<FlowRunLoggerBackgroundService>();
 
 var app = builder.Build();
 
