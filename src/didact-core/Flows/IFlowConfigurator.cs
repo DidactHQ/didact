@@ -41,6 +41,10 @@ namespace DidactCore.Flows
         /// </summary>
         string DefaultQueueName { get; }
 
+        EnvironmentContext EnvironmentContext { get; }
+
+        DeploymentContext DeploymentContext { get; }
+
         /// <summary>
         /// The collection of Cron Scheduler triggers for the Flow.
         /// </summary>

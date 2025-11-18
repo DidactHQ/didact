@@ -11,7 +11,7 @@ namespace DidactServices.DataModel.Entities
 
         public long TriggerId { get; set; }
 
-        public long ExecutionVersionId { get; set; }
+        public long FlowVersionId { get; set; }
 
         public long EnvironmentId { get; set; }
 
@@ -23,13 +23,11 @@ namespace DidactServices.DataModel.Entities
 
         public string? JsonPayload { get; set; }
 
-        public DateTime? ExecuteAfter { get; set; }
-
         public int TimeoutSeconds { get; set; }
 
         public int StateId { get; set; }
 
-        public DateTime ProjectedStartTime { get; set; }
+        public DateTime? ExecuteAt { get; set; }
 
         public DateTime? ExecutionStarted { get; set; }
 

@@ -2,9 +2,9 @@
 
 namespace DidactServices.DataModel.Entities
 {
-    public class LibraryDeploymentType
+    public class DeploymentType
     {
-        public int LibraryDeploymentTypeId { get; set; }
+        public int DeploymentTypeId { get; set; }
 
         public string Name { get; set; } = null!;
 

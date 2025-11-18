@@ -2,19 +2,15 @@
 
 namespace DidactServices.DataModel.Entities
 {
-    public class LibraryDeployment
+    public class DeploymentSourceFilesystem
     {
-        public long LibraryDeploymentId { get; set; }
+        public long DeploymentSourceFilesystemId { get; set; }
 
-        public int LibraryDeploymentTypeId { get; set; }
-
-        public long LibraryId { get; set; }
+        public long DeploymentId { get; set; }
 
         public long EnvironmentId { get; set; }
 
-        public string? Name { get; set; }
-
-        public string? Description { get; set; }
+        public string FolderPath { get; set; } = null!;
 
         public DateTime Created { get; set; }
 

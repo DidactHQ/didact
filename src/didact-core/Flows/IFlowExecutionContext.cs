@@ -4,8 +4,18 @@ namespace DidactCore.Flows
 {
     public interface IFlowExecutionContext
     {
-        string? StringifiedJsonInput { get; set; }
+        string? StringifiedJsonInput { get; }
 
-        CancellationToken CancellationToken { get; set; }
+        CancellationToken CancellationToken { get; }
+
+        IFlowLogger Logger { get; }
+
+        EnvironmentContext EnvironmentContext { get; }
+
+        DeploymentContext DeploymentContext { get; }
+
+        FlowContext FlowContext { get; }
+
+        FlowRunContext FlowRunContext { get; }
     }
 }

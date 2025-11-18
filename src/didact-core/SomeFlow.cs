@@ -6,18 +6,14 @@ namespace DidactCore
 {
     public class SomeFlow : IFlow
     {
-        private readonly IFlowLogger _flowLogger;
-
-        public SomeFlow(IFlowLogger flowLogger)
-        {
-            _flowLogger = flowLogger;
-        }
+        public SomeFlow() { }
 
         public Task<IFlowConfigurator> ConfigureAsync(IFlowConfigurator flowConfigurator)
         {
             flowConfigurator
-                .WithTypeName(GetType().Name)
+                .WithName("An example flow")
                 .WithDescription("A sample flow")
+                .AsVersion("1.0.0")
                 .WithCronScheduleTrigger(new CronScheduleTrigger("test"));
 
             return Task.FromResult(flowConfigurator);
@@ -25,9 +21,10 @@ namespace DidactCore
 
         public async Task ExecuteAsync(IFlowExecutionContext context)
         {
-            _flowLogger.LogInformation("Starting work...");
-            await Task.Delay(1000);
-            _flowLogger.LogInformation("Work completed.");
+            var logger = context.Logger;
+            logger.LogInformation("Starting work...");
+            await Task.CompletedTask;
+            logger.LogInformation("Work completed.");
         }
     }
 }

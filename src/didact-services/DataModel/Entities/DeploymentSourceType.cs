@@ -2,13 +2,13 @@
 
 namespace DidactServices.DataModel.Entities
 {
-    public class ExecutionVersion
+    public class DeploymentSourceType
     {
-        public long ExecutionVersionId { get; set; }
+        public int DeploymentSourceTypeId { get; set; }
 
-        public long LibraryVersionId { get; set; }
+        public string Name { get; set; } = null!;
 
-        public long FlowVersionId { get; set; }
+        public string Description { get; set; } = null!;
 
         public DateTime Created { get; set; }
 

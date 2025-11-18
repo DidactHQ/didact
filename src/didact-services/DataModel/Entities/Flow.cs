@@ -9,7 +9,7 @@ namespace DidactServices.DataModel.Entities
 
         public long EnvironmentId { get; set; }
 
-        public long LibraryId { get; set; }
+        public long DeploymentId { get; set; }
 
         public string? Name { get; set; }
 

@@ -2,15 +2,13 @@
 
 namespace DidactServices.DataModel.Entities
 {
-    public class LibraryVersion
+    public class DeploymentStatus
     {
-        public long LibraryVersionId { get; set; }
+        public int DeploymentStatusId { get; set; }
 
-        public long LibraryId { get; set; }
+        public string Name { get; set; } = null!;
 
-        public long EnvironmentId { get; set; }
-
-        public string AssemblyVersion { get; set; } = null!;
+        public string Description { get; set; } = null!;
 
         public DateTime Created { get; set; }
 
