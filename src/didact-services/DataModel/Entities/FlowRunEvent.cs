@@ -12,7 +12,7 @@ namespace DidactServices.DataModel.Entities
 
         public long EnvironmentId { get; set; }
 
-        public DateTime OccurredAt { get; set; }
+        public DateTime Timestamp { get; set; }
 
         public DateTime Created { get; set; }
 
