@@ -1,17 +1,23 @@
-﻿namespace DidactEngine.Logging
+﻿using DidactEngine.Constants;
+using DidactEngine.Engine;
+
+namespace DidactEngine.Logging
 {
-    public class EngineLoggerBackgroundService : BackgroundService
+    public class EngineLoggerModule : IEngineModule
     {
         private readonly EngineLogChannel _engineChannel;
         private readonly IEngineLogRepository _repository;
 
-        public EngineLoggerBackgroundService(EngineLogChannel channel, IEngineLogRepository repository)
+        public string Name => EngineConstants.EngineModuleNames.EngineLogger;
+        public bool Enabled { get; set; } = true;
+
+        public EngineLoggerModule(EngineLogChannel channel, IEngineLogRepository repository)
         {
             _engineChannel = channel;
             _repository = repository;
         }
 
-        protected override async Task ExecuteAsync(CancellationToken token)
+        public async Task ExecuteAsync(CancellationToken token)
         {
             await foreach (var log in _engineChannel.Channel.Reader.ReadAllAsync(token))
             {
