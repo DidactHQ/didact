@@ -15,7 +15,7 @@
         {
             public const string Plugins = "Plugins";
             public const string Scheduler = "Scheduler";
-            public const string Worker = "Worker";
+            public const string Workers = "Workers";
             public const string Licensing = "Licensing";
             public const string EngineLogger = "Engine Logger";
             public const string FlowRunLogger = "FlowRun Logger";
