@@ -17,9 +17,10 @@ namespace DidactEngine.Plugins
             /* Implementation
              * Step 1: Poll database for missing deployments.
              * Step 2: Fetch each deployment.
-             * Step 3: Load each deployment in a new ALC.
-             * Step 4: Implement plugin-isolated dependency injection.
-             * Step 5: Run ConfigureAsync against all flows.
+             * Step 3: Shadow copy each deployment.
+             * Step 4: Load each deployment in a new ALC.
+             * Step 5: Implement plugin-isolated dependency injection.
+             * Step 6: Run ConfigureAsync against all flows.
              */
 
             await Task.CompletedTask;
