@@ -1,6 +1,8 @@
 using DidactEngine.Constants;
 using DidactEngine.Engine;
 using DidactEngine.Logging;
+using DidactEngine.Plugins;
+using DidactEngine.Workers;
 using DidactServices.Constants;
 using DidactServices.DataModel.Contexts;
 using DidactServices.HostAppEnvironments;
@@ -179,7 +181,11 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSingleton<EngineLogChannel>();
 builder.Services.AddSingleton<FlowRunLogChannel>();
 
-// Register module supervisor.
+// Register modules and module supervisor.
+builder.Services.AddSingleton<IEngineModule, EngineLoggerModule>();
+builder.Services.AddSingleton<IEngineModule, FlowRunLoggerModule>();
+builder.Services.AddSingleton<IEngineModule, PluginsModule>();
+builder.Services.AddSingleton<IEngineModule, WorkersModule>();
 builder.Services.AddHostedService<EngineModuleSupervisor>();
 
 var app = builder.Build();
