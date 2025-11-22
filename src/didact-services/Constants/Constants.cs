@@ -11,8 +11,9 @@
 
         public static class ApplicationConfigurationFileNames
         {
-            public const string DidactUiSettings = "uisettings.json";
-            public const string DidactEngineSettings = "enginesettings.json";
+            public const string DidactCli = "cliconfig.json";
+            public const string DidactUi = "uiconfig.json";
+            public const string DidactEngine = "engineconfig.json";
         }
 
         public static class Defaults
