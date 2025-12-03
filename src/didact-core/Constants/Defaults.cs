@@ -1,4 +1,6 @@
-﻿namespace DidactCore.Constants
+﻿using DidactPrimitives.Constants;
+
+namespace DidactCore.Constants
 {
     public static class Defaults
     {
