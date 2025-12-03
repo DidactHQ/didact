@@ -6,6 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <NoWarn>$(NoWarn);1591</NoWarn>
+	<NoWarn>$(NoWarn);IDE0290</NoWarn>
     <UserSecretsId>8bccdc4b-2bdb-4817-a72e-bdd5935343db</UserSecretsId>
 	<PublishSingleFile>true</PublishSingleFile>
 	<SelfContained>true</SelfContained>
