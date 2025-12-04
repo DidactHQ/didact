@@ -11,7 +11,7 @@
             public const string Production = "ProductionCors";
         }
 
-        public static class EngineModuleNames
+        public static class ModuleNames
         {
             public const string Plugins = "Plugins";
             public const string Scheduler = "Scheduler";
