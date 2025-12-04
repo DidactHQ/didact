@@ -8,6 +8,8 @@ namespace DidactServices.DataModel.Entities
 
         public long EnvironmentId { get; set; }
 
+        public Guid UniversalId { get; set; }
+
         public string UniqueName { get; set; } = null!;
 
         public string? Name { get; set; }
