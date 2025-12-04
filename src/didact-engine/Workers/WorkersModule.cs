@@ -1,14 +1,20 @@
 ﻿using DidactEngine.Constants;
-using DidactEngine.Engine;
+using DidactEngine.Modules;
 
 namespace DidactEngine.Workers
 {
-    public class WorkersModule : IEngineModule
+    public class WorkersModule : IModule
     {
-        public string Name => EngineConstants.EngineModuleNames.Workers;
+        public string Name => EngineConstants.ModuleNames.Workers;
+
         public bool Enabled { get; set; } = true;
 
-        public Task ExecuteAsync(CancellationToken ct)
+        // TODO Implement custom concurrency from default and/or config.json
+        public int Concurrency { get; set; } = 1;
+
+        public int IntervalDelay { get; set; } = Defaults.DefaultModuleIntervalDelays.Workers;
+
+        public Task ExecuteAsync(CancellationToken cancellationToken)
         {
             // TODO
 

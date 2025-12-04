@@ -1,12 +1,17 @@
 ﻿using DidactEngine.Constants;
-using DidactEngine.Engine;
+using DidactEngine.Modules;
 
 namespace DidactEngine.Plugins
 {
-    public class PluginsModule : IEngineModule
+    public class PluginsModule : IModule
     {
-        public string Name => EngineConstants.EngineModuleNames.Plugins;
+        public string Name => EngineConstants.ModuleNames.Plugins;
+
         public bool Enabled { get; set; } = true;
+
+        public int Concurrency { get; set; } = 1;
+
+        public int IntervalDelay { get; set; } = Defaults.DefaultModuleIntervalDelays.Plugins;
 
         public PluginsModule() { }
 

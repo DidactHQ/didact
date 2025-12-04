@@ -1,15 +1,20 @@
 ﻿using DidactEngine.Constants;
-using DidactEngine.Engine;
+using DidactEngine.Modules;
 
 namespace DidactEngine.Logging
 {
-    public class FlowRunLoggerModule : IEngineModule
+    public class FlowRunLoggerModule : IModule
     {
         private readonly FlowRunLogChannel _flowRunLogChannel;
         private readonly IFlowLogRepository _repository;
 
-        public string Name => EngineConstants.EngineModuleNames.FlowRunLogger;
+        public string Name => EngineConstants.ModuleNames.FlowRunLogger;
+
         public bool Enabled { get; set; } = true;
+
+        public int Concurrency { get; set; } = 1;
+
+        public int IntervalDelay { get; set; } = Defaults.DefaultModuleIntervalDelays.FlowRunLogger;
 
         public FlowRunLoggerModule(FlowRunLogChannel flowRunLogChannel, IFlowLogRepository repository)
         {
