@@ -10,7 +10,7 @@ namespace DidactEngine.Workers
         public bool Enabled { get; set; } = true;
 
         // TODO Implement custom concurrency from default and/or config.json
-        public int Concurrency { get; set; } = 1;
+        public int Concurrency { get; set; } = Environment.ProcessorCount;
 
         public int IntervalDelay { get; set; } = Defaults.DefaultModuleIntervalDelays.Workers;
 
