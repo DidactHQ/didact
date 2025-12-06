@@ -1,10 +1,13 @@
-﻿using System.Collections.Concurrent;
+﻿using DidactEngine.Threading;
+using System.Collections.Concurrent;
 
 namespace DidactCore.Threading
 {
     public class DidactThreadpoolTaskScheduler : TaskScheduler
     {
         private readonly ILogger<DidactThreadpoolTaskScheduler> _logger;
+
+        private readonly ThreadpoolService _threadpoolService;
 
         private readonly CancellationToken _cancellationToken;
 
@@ -26,13 +29,14 @@ namespace DidactCore.Threading
         /// Remember that we have three essential performance parameters to balance: processor count, thread count, and task count.
         /// </para>
         /// </summary>
-        public DidactThreadpoolTaskScheduler(ILogger<DidactThreadpoolTaskScheduler> logger, CancellationToken cancellationToken, decimal threadFactor)
+        public DidactThreadpoolTaskScheduler(ILogger<DidactThreadpoolTaskScheduler> logger, ThreadpoolService threadpoolService)
         {
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-            _cancellationToken = cancellationToken;
+            _threadpoolService = threadpoolService ?? throw new ArgumentNullException(nameof(threadpoolService));
+            _cancellationToken = _threadpoolService.CancellationToken;
             _tasks = [];
 
-            var threadCount = (long)Math.Ceiling(Environment.ProcessorCount * threadFactor);
+            var threadCount = (long)Math.Ceiling(Environment.ProcessorCount * threadpoolService.ThreadFactor);
             _threadCount = threadCount <= 0
                 ? throw new ArgumentOutOfRangeException(nameof(threadCount))
                 : threadCount;
