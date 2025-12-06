@@ -1,11 +1,4 @@
-﻿using DidactCore.Engine;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Collections.Concurrent;
 
 namespace DidactCore.Threading
 {
@@ -33,10 +26,10 @@ namespace DidactCore.Threading
         /// Remember that we have three essential performance parameters to balance: processor count, thread count, and task count.
         /// </para>
         /// </summary>
-        public DidactThreadpoolTaskScheduler(ILogger<DidactThreadpoolTaskScheduler> logger, IEngineSupervisor engineSupervisor, decimal threadFactor)
+        public DidactThreadpoolTaskScheduler(ILogger<DidactThreadpoolTaskScheduler> logger, CancellationToken cancellationToken, decimal threadFactor)
         {
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-            _cancellationToken = engineSupervisor.CancellationToken;
+            _cancellationToken = cancellationToken;
             _tasks = [];
 
             var threadCount = (long)Math.Ceiling(Environment.ProcessorCount * threadFactor);
@@ -67,19 +60,24 @@ namespace DidactCore.Threading
             _currentThreadIsExecuting.Value = true;
             _currentThreadName.Value = Thread.CurrentThread.Name!;
 
+            _logger.LogInformation("Initializing thread execution loop on {threadName}...", _currentThreadName.Value);
+
             while (true)
             {
                 try
                 {
-                    // Block the thread to avoid busy waiting.
-                    // Only take one task at a time to evenly distribute work if others are freed.
-                    var task = _tasks.Take(_cancellationToken);
-                    TryExecuteTask(task);
+                    // Avoid busy waiting.
+                    foreach (var task in _tasks.GetConsumingEnumerable(_cancellationToken))
+                    {
+                        TryExecuteTask(task);
+                    }
                 }
-                catch (OperationCanceledException)
+                catch (OperationCanceledException) when (_cancellationToken.IsCancellationRequested)
                 {
                     // If the engine is shutting down, let the FlowRuns finish gracefully.
                     // So we will swallow the exception here and not worry about it.
+                    _logger.LogWarning("{taskSchedulerName} cancellation detected on {threadName}. Stopping thread execution loop...", nameof(DidactThreadpoolTaskScheduler), _currentThreadName.Value);
+                    break;
                 }
                 catch (ThreadInterruptedException ex)
                 {
@@ -107,7 +105,12 @@ namespace DidactCore.Threading
             // Also, Microsoft generally recommends allowing for inline execution when using custom threads.
             // See https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.taskscheduler
             var isDidactThread = _currentThreadIsExecuting.Value;
-            return isDidactThread && TryExecuteTask(task);
+            if (!isDidactThread) return false;
+
+            // Prevent inlining for already-enqueued tasks.
+            if (taskWasPreviouslyQueued) return false;
+
+            return TryExecuteTask(task);
         }
 
         protected sealed override IEnumerable<Task> GetScheduledTasks()
