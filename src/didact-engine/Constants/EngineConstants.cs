@@ -28,5 +28,11 @@
             public const string Draining = "Draining";
             public const string Unloaded = "Unloaded";
         }
+
+        public static class ThreadpoolShutdownModes
+        {
+            public const string Immediate = "Immediate";
+            public const string Drain = "Drain";
+        }
     }
 }
