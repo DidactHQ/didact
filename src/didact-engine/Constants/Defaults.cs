@@ -2,6 +2,8 @@
 {
     public static class Defaults
     {
+        public const decimal DefaultThreadFactor = 1;
+
         public static class DefaultModuleIntervalDelays
         {
             public const int Plugins = 120000;
