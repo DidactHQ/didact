@@ -1,4 +1,6 @@
 ﻿using DidactCore.Constants;
+using DidactCore.Deployments;
+using DidactCore.Environments;
 using DidactCore.Triggers;
 using System.Collections.Generic;
 using System.Threading.Tasks;

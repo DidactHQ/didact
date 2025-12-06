@@ -1,4 +1,4 @@
-﻿namespace DidactCore.Flows
+﻿namespace DidactCore.Environments
 {
     public class EnvironmentContext
     {
