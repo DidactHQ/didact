@@ -8,5 +8,11 @@
         {
             _logger = logger;
         }
+
+        public async Task ScheduleAsync(CancellationToken cancellationToken)
+        {
+            // TODO Implement
+            await Task.CompletedTask;
+        }
     }
 }

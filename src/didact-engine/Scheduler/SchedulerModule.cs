@@ -22,7 +22,7 @@ namespace DidactEngine.Scheduler
 
         public async Task ExecuteAsync(CancellationToken cancellationToken)
         {
-
+            await _schedulerService.ScheduleAsync(cancellationToken);
         }
     }
 }
