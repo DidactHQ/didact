@@ -13,5 +13,7 @@
             public const int EngineLogger = 0;
             public const int FlowRunLogger = 0;
         }
+
+        public const int DefaultWorkersServiceDequeueIntervalDelay = 5000;
     }
 }
