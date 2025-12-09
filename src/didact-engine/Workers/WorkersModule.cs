@@ -5,26 +5,24 @@ namespace DidactEngine.Workers
 {
     public class WorkersModule : IModule
     {
+        private readonly WorkersService _workersService;
+
         public string Name => EngineConstants.ModuleNames.Workers;
 
         public bool Enabled { get; set; } = true;
 
-        // TODO Implement custom concurrency from default and/or config.json
         public int Concurrency { get; set; } = Environment.ProcessorCount;
 
         public int IntervalDelay { get; set; } = Defaults.DefaultModuleIntervalDelays.Workers;
 
-        public Task ExecuteAsync(CancellationToken cancellationToken)
+        public WorkersModule(WorkersService workersService)
         {
-            // TODO
+            _workersService = workersService;
+        }
 
-            /* Implementation
-             * Step 1: Poll database for strictly-compatible flowruns (meaning the deployments are loaded as plugins already).
-             * Step 2: Instantiate each flowrun.
-             * Step 3: Execute each flowrun.
-             */
-
-            return Task.CompletedTask;
+        public async Task ExecuteAsync(CancellationToken cancellationToken)
+        {
+            await _workersService.DequeueAndExecuteAsync(cancellationToken);
         }
     }
 }
