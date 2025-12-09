@@ -1,7 +1,12 @@
+using DidactCore.Threading;
 using DidactEngine.Constants;
 using DidactEngine.Engine;
 using DidactEngine.Logging;
+using DidactEngine.Modules;
 using DidactEngine.Plugins;
+using DidactEngine.Scheduler;
+using DidactEngine.System;
+using DidactEngine.Threading;
 using DidactEngine.Workers;
 using DidactServices.Constants;
 using DidactServices.DataModel.Contexts;
@@ -177,16 +182,37 @@ builder.Services.AddSwaggerGen(options =>
 });
 builder.Services.AddEndpointsApiExplorer();
 
+// Register engine types.
+builder.Services.AddSingleton<IEngineService, EngineService>();
+
 // Register logging services.
 builder.Services.AddSingleton<EngineLogChannel>();
 builder.Services.AddSingleton<FlowRunLogChannel>();
 
+// Register plugin types.
+builder.Services.AddSingleton<IPluginContainers, PluginContainers>();
+builder.Services.AddTransient<IPluginDependencyInjector, PluginDependencyInjector>();
+
+// Register scheduler types.
+builder.Services.AddSingleton<SchedulerService>();
+
+// Register system types.
+builder.Services.AddSingleton<SystemContext>();
+
+// Register threading types.
+builder.Services.AddSingleton<ThreadpoolService>();
+builder.Services.AddSingleton<DidactThreadpoolTaskScheduler>();
+
+// Register worker types.
+builder.Services.AddSingleton<WorkersService>();
+
 // Register modules and module supervisor.
-builder.Services.AddSingleton<IEngineModule, EngineLoggerModule>();
-builder.Services.AddSingleton<IEngineModule, FlowRunLoggerModule>();
-builder.Services.AddSingleton<IEngineModule, PluginsModule>();
-builder.Services.AddSingleton<IEngineModule, WorkersModule>();
-builder.Services.AddHostedService<EngineModuleSupervisor>();
+builder.Services.AddSingleton<IModule, EngineLoggerModule>();
+builder.Services.AddSingleton<IModule, FlowRunLoggerModule>();
+builder.Services.AddSingleton<IModule, PluginsModule>();
+builder.Services.AddSingleton<IModule, SchedulerModule>();
+builder.Services.AddSingleton<IModule, WorkersModule>();
+builder.Services.AddHostedService<ModuleSupervisor>();
 
 var app = builder.Build();
 
