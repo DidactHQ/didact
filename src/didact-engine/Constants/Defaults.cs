@@ -15,5 +15,6 @@
         }
 
         public const int DefaultWorkersServiceDequeueIntervalDelay = 5000;
+        public const int FlowRunCancellationPollingInterval = 60000;
     }
 }
