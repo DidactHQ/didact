@@ -1,9 +1,18 @@
-﻿namespace DidactEngine.Plugins
+﻿using DidactCore.Flows;
+using DidactEngine.Workers;
+using System.Collections.Concurrent;
+
+namespace DidactEngine.Plugins
 {
     public class PluginsService
     {
-        public PluginsService()
+        private readonly ILogger<PluginsService> _logger;
+        private readonly ConcurrentDictionary<long, PluginContainer> _pluginContainersDictionary;
+
+        public PluginsService(ILogger<PluginsService> logger)
         {
+            _logger = logger;
+            _pluginContainersDictionary = new ConcurrentDictionary<long, PluginContainer>();
         }
 
         public async Task PollMissingDeploymentsAsync()
@@ -29,6 +38,11 @@
         public async Task ConfigureAllFlowsInPluginAsync()
         {
             await Task.CompletedTask;
+        }
+
+        public WorkerContext InstantiateFlow(WorkerContext workerContext)
+        {
+
         }
     }
 }
