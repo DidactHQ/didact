@@ -22,7 +22,7 @@ namespace DidactEngine.Workers
 
         public async Task ExecuteAsync(CancellationToken cancellationToken)
         {
-            await _workersService.DequeueAndExecuteAsync(cancellationToken);
+            await _workersService.WorkAsyncOnThreadpool(cancellationToken);
         }
     }
 }

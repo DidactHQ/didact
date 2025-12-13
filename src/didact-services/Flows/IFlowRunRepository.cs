@@ -1,7 +1,6 @@
-﻿using DidactCore.Entities;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
-namespace DidactCore.Flows
+namespace DidactServices.Flows
 {
     public interface IFlowRunRepository
     {
