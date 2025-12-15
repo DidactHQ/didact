@@ -1,9 +1,6 @@
 ﻿using DidactCore.Constants;
-using DidactCore.Deployments;
-using DidactCore.Environments;
 using DidactCore.Triggers;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace DidactCore.Flows
 {
@@ -42,10 +39,6 @@ namespace DidactCore.Flows
         /// The designated queue that the Flow will execute against.
         /// </summary>
         string DefaultQueueName { get; }
-
-        EnvironmentContext EnvironmentContext { get; }
-
-        DeploymentContext DeploymentContext { get; }
 
         /// <summary>
         /// The collection of Cron Scheduler triggers for the Flow.
@@ -94,12 +87,5 @@ namespace DidactCore.Flows
         /// <param name="cronScheduleTrigger"></param>
         /// <returns></returns>
         IFlowConfigurator WithCronScheduleTrigger(ICronScheduleTrigger cronScheduleTrigger);
-
-        /// <summary>
-        /// Asynchronously saves the Flow configurations to persistent storage.
-        /// </summary>
-        /// <returns></returns>
-        /// <exception cref="SaveFlowConfigurationsException"></exception>
-        Task SaveConfigurationsAsync();
     }
 }

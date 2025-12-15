@@ -6,24 +6,22 @@ namespace DidactCore
 {
     public class SomeFlow : IFlow
     {
-        public SomeFlow() { }
-
-        public Task<IFlowConfigurator> ConfigureAsync(IFlowConfigurator flowConfigurator)
+        public Task<IFlowConfigurationContext> ConfigureAsync(IFlowConfigurationContext context)
         {
-            flowConfigurator
+            context.Configurator
                 .WithName("An example flow")
                 .WithDescription("A sample flow")
                 .AsVersion("1.0.0")
                 .WithCronScheduleTrigger(new CronScheduleTrigger("test"));
 
-            return Task.FromResult(flowConfigurator);
+            return Task.FromResult(context);
         }
 
         public async Task ExecuteAsync(IFlowExecutionContext context)
         {
             var logger = context.Logger;
             logger.LogInformation("Starting work...");
-            await Task.CompletedTask;
+            await Task.Delay(100);
             logger.LogInformation("Work completed.");
         }
     }
