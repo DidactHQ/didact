@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DidactCore.Flows
+﻿namespace DidactCore.Flows
 {
     public interface IFlowContext
     {
+        public long FlowId { get; set; }
+
+        public string? Name { get; set; }
+
+        public string TypeName { get; set; }
     }
 }

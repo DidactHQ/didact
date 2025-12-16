@@ -4,7 +4,9 @@ using DidactEngine.Constants;
 using DidactEngine.Flows;
 using DidactEngine.Logging;
 using DidactEngine.Plugins;
-using DidactServices.Flows;
+using DidactServices.FlowRuns;
+using DidactServices.Workers;
+using DidactServices.Mapping;
 
 namespace DidactEngine.Workers
 {
@@ -25,12 +27,13 @@ namespace DidactEngine.Workers
             _flowRunRepository = flowRunRepository;
         }
 
-        private async Task<WorkerContext?> DequeueFlowRunAsync(CancellationToken cancellationToken)
+        private async Task<IWorkerContext?> DequeueFlowRunAsync(CancellationToken cancellationToken)
         {
-            await Task.CompletedTask;
+            var flowRunWorkerContext = await _flowRunRepository.DequeueFlowRunWithWorkerContextAsync(cancellationToken);
+            return flowRunWorkerContext.MapToWorkerContext();
         }
 
-        private async Task PollFlowRunCancellationAsync(WorkerContext workerContext, CancellationToken compositeCancellationToken)
+        private async Task PollFlowRunCancellationAsync(IWorkerContext workerContext, CancellationToken compositeCancellationToken)
         {
             while (true)
             {
@@ -55,25 +58,26 @@ namespace DidactEngine.Workers
             }
         }
 
-        private async Task ExecuteFlowRunTimeoutCountdownAsync(WorkerContext workerContext, CancellationToken compositeCancellationToken)
+        private async Task ExecuteFlowRunTimeoutCountdownAsync(IWorkerContext workerContext, CancellationToken compositeCancellationToken)
         {
             var timeout = TimeSpan.FromSeconds(workerContext.FlowRunContext.TimeoutSeconds);
             await Task.Delay(timeout, compositeCancellationToken);
         }
 
-        private async Task ExecuteFlowRunAsync(WorkerContext workerContext, CancellationToken compositeCancellationToken)
+        private async Task ExecuteFlowRunAsync(IWorkerContext workerContext, CancellationToken compositeCancellationToken)
         {
             if (workerContext.FlowInstance is null)
                 throw new InvalidOperationException(
                     $"The {nameof(IFlow)} instance of {nameof(workerContext)} was null for FlowRunId {workerContext.FlowRunContext.FlowRunId}.");
 
+            // TODO Implement proper injection.
             var flowExecutionContext = new FlowExecutionContext(workerContext.EnvironmentContext, workerContext.DeploymentContext,
                 workerContext.FlowContext, workerContext.FlowRunContext, new FlowLogger(), compositeCancellationToken);
 
             await workerContext.FlowInstance.ExecuteAsync(flowExecutionContext);
         }
 
-        private async Task ExecuteAsync(WorkerContext workerContext, CancellationToken cancellationToken)
+        private async Task ExecuteAsync(IWorkerContext workerContext, CancellationToken cancellationToken)
         {
             using var flowRunCancellationTokenSource = new CancellationTokenSource();
             using var flowRunTimeoutCancellationTokenSource = new CancellationTokenSource();
@@ -106,7 +110,17 @@ namespace DidactEngine.Workers
                     // Flow threw OCE without timeout/DB-cancel winning the race.
                     // Treat this as a "self-cancelled" run.
                     // TODO: either CancelFlowRunAsync or a distinct "self cancelled" status
-                    await _flowRunRepository.CancelFlowRunAsync(workerContext.FlowRunContext.FlowRunId);
+
+                    try
+                    {
+                        await _flowRunRepository.CancelFlowRunAsync(workerContext.FlowRunContext.FlowRunId);
+                    }
+                    catch (Exception ex)
+                    {
+                        _logger.LogError("Failed to cancel FlowRunId {id}. See inner exception: {ex}",
+                            workerContext.FlowRunContext.FlowRunId, ex);
+                    }
+                    
                 }
                 catch (Exception ex)
                 {
@@ -195,7 +209,7 @@ namespace DidactEngine.Workers
              * Step 3: Execute each flowrun.
              */
 
-            WorkerContext? workerContext = null;
+            IWorkerContext? workerContext = null;
 
             try
             {
@@ -203,12 +217,12 @@ namespace DidactEngine.Workers
             }
             catch (Exception ex)
             {
-
+                _logger.LogError("Failed to dequeue a FlowRun. See inner exception: {ex}", ex);
             }
             
             if (workerContext is null)
             {
-                // If no work was found, delay to prevent hammering the database and early return.
+                // If no work was found or failed, delay to prevent hammering the database and early return.
                 await Task.Delay(DequeueIntervalDelay, cancellationToken);
                 return;
             }
@@ -219,7 +233,21 @@ namespace DidactEngine.Workers
             }
             catch (Exception ex)
             {
+                _logger.LogError("Failed to instantiate FlowRunId {id}. See inner exception: {ex}",
+                    workerContext.FlowRunContext.FlowRunId, ex);
 
+                // If instantiation fails, fail the flowrun.
+                try
+                {
+                    await _flowRunRepository.FailFlowRunAsync(workerContext.FlowRunContext.FlowRunId);
+                }
+                catch (Exception repoEx)
+                {
+                    _logger.LogError("Failed to mark FlowRunId {id} as failed. See inner exception: {ex}",
+                        workerContext.FlowRunContext.FlowRunId, repoEx);
+                }
+
+                return;
             }
 
             // Execute the flowrun.

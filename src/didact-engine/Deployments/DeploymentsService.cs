@@ -16,7 +16,7 @@ namespace DidactEngine.Deployments
             await Task.CompletedTask;
         }
 
-        public async Task FetchDeploymentFromSourceAsync(DeploymentContext deploymentContext, CancellationToken cancellationToken)
+        public async Task FetchDeploymentFromSourceAsync(IDeploymentContext deploymentContext, CancellationToken cancellationToken)
         {
             await Task.CompletedTask;
         }

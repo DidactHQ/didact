@@ -5,9 +5,9 @@ namespace DidactCore.Flows
 {
     public interface IFlowConfigurationContext
     {
-        EnvironmentContext EnvironmentContext { get; }
+        IEnvironmentContext EnvironmentContext { get; }
 
-        DeploymentContext DeploymentContext { get; }
+        IDeploymentContext DeploymentContext { get; }
 
         IFlowConfigurator Configurator { get; }
     }

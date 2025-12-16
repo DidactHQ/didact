@@ -1,16 +1,31 @@
-﻿using System.Threading;
+﻿using DidactCore.Deployments;
+using DidactCore.Environments;
+using DidactCore.Flows;
 
-namespace DidactCore.Flows
+namespace DidactEngine.Flows
 {
     public class FlowExecutionContext : IFlowExecutionContext
     {
-        public string? StringifiedJsonInput { get; set; }
+        public CancellationToken CancellationToken { get; }
 
-        public CancellationToken CancellationToken { get; set; }
+        public IFlowLogger Logger { get; }
 
-        public FlowExecutionContext(string? stringifiedJsonInput, CancellationToken cancellationToken)
+        public IEnvironmentContext EnvironmentContext { get; }
+
+        public IDeploymentContext DeploymentContext { get; }
+
+        public IFlowContext FlowContext { get; }
+
+        public IFlowRunContext FlowRunContext { get; }
+
+        public FlowExecutionContext(IEnvironmentContext environmentContext, IDeploymentContext deploymentContext,
+            IFlowContext flowContext, IFlowRunContext flowRunContext, IFlowLogger flowLogger, CancellationToken cancellationToken)
         {
-            StringifiedJsonInput = stringifiedJsonInput;
+            EnvironmentContext = environmentContext;
+            DeploymentContext = deploymentContext;
+            FlowContext = flowContext;
+            FlowRunContext = flowRunContext;
+            Logger = flowLogger;
             CancellationToken = cancellationToken;
         }
     }

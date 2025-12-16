@@ -10,12 +10,12 @@ namespace DidactCore.Flows
 
         IFlowLogger Logger { get; }
 
-        EnvironmentContext EnvironmentContext { get; }
+        IEnvironmentContext EnvironmentContext { get; }
 
-        DeploymentContext DeploymentContext { get; }
+        IDeploymentContext DeploymentContext { get; }
 
-        FlowContext FlowContext { get; }
+        IFlowContext FlowContext { get; }
 
-        FlowRunContext FlowRunContext { get; }
+        IFlowRunContext FlowRunContext { get; }
     }
 }

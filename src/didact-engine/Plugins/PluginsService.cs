@@ -1,5 +1,4 @@
-﻿using DidactCore.Flows;
-using DidactEngine.Workers;
+﻿using DidactServices.Workers;
 using System.Collections.Concurrent;
 
 namespace DidactEngine.Plugins
@@ -40,7 +39,7 @@ namespace DidactEngine.Plugins
             await Task.CompletedTask;
         }
 
-        public WorkerContext InstantiateFlow(WorkerContext workerContext)
+        public WorkerContext InstantiateFlow(IWorkerContext workerContext)
         {
 
         }
