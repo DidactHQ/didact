@@ -6,12 +6,14 @@ namespace DidactEngine.Plugins
     public class PluginsService
     {
         private readonly ILogger<PluginsService> _logger;
-        private readonly ConcurrentDictionary<long, PluginContainer> _pluginContainersDictionary;
+        private readonly IPluginContainerFactory _pluginContainerFactory;
+        private readonly ConcurrentDictionary<long, IPluginContainer> _pluginContainersDictionary;
 
-        public PluginsService(ILogger<PluginsService> logger)
+        public PluginsService(ILogger<PluginsService> logger, IPluginContainerFactory pluginContainerFactory)
         {
             _logger = logger;
-            _pluginContainersDictionary = new ConcurrentDictionary<long, PluginContainer>();
+            _pluginContainerFactory = pluginContainerFactory;
+            _pluginContainersDictionary = new ConcurrentDictionary<long, IPluginContainer>();
         }
 
         public async Task PollMissingDeploymentsAsync()
@@ -26,22 +28,38 @@ namespace DidactEngine.Plugins
 
         public async Task LoadDeploymentAsPluginAsync()
         {
+            var pluginContainerContext = new PluginContainerContext();
+            var pluginContainer = _pluginContainerFactory.Create(pluginContainerContext);
             await Task.CompletedTask;
         }
 
-        public void ConfigurePluginDependencyInjection()
-        {
+        public async Task ConfigurePluginAsync(IPluginContainer pluginContainer)
+        {            
+            // Step 1: Configure plugin DI.
+            try
+            {
+                pluginContainer.ConfigureDependencyInjection();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "The plugin container failed to configure.");
+            }
 
-        }
-
-        public async Task ConfigureAllFlowsInPluginAsync()
-        {
-            await Task.CompletedTask;
+            // Step 2: Run plugin configurations for all flows.
+            try
+            {
+                await pluginContainer.ConfigureFlowsAsync();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "The plugin container failed to configure.");
+            }
         }
 
         public WorkerContext InstantiateFlow(IWorkerContext workerContext)
         {
-
+            var flowName = workerContext.FlowContext.Name;
+            var flowVersion = workerContext.FlowRunContext.FlowVersion;
         }
     }
 }

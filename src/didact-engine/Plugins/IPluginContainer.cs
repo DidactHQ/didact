@@ -1,41 +1,17 @@
-﻿using System.Reflection;
-
-namespace DidactEngine.Plugins
+﻿namespace DidactEngine.Plugins
 {
     public interface IPluginContainer
     {
-        PluginAssemblyLoadContext PluginAssemblyLoadContext { get; set; }
-
-        ICollection<PluginExecutionVersion> PluginExecutionVersions { get; }
+        IPluginContainerContext PluginContainerContext { get; }
 
         DateTime? PluginLoadedAt { get; set; }
 
         DateTime? LastExecution { get; set; }
 
-        IPluginDependencyInjector PluginDependencyInjector { get; set; }
-
-        /// <summary>
-        /// Gets an enumeration of the assemblies from the plugin container's <see cref="Plugins.PluginAssemblyLoadContext"/>.
-        /// </summary>
-        /// <returns></returns>
-        IEnumerable<Assembly> GetAssemblies();
-
-        /// <summary>
-        /// Sets a timestamp for when the plugin was loaded into the plugin container.
-        /// </summary>
-        /// <param name="pluginLoadedAt"></param>
-        void SetPluginLoadedAt(DateTime? pluginLoadedAt);
-
         /// <summary>
         /// Configures the plugin's dependency injection system.
         /// </summary>
         void ConfigureDependencyInjection();
-
-        /// <summary>
-        /// Retrieves and instantiates all Flow types to generate their configurators.
-        /// Then uses the configurators and reflection to determine each Flow's <see cref="PluginExecutionVersion"/>.
-        /// </summary>
-        Task CollectPluginExecutionVersionsAsync();
 
         /// <summary>
         /// Retrieves all Flow types from the plugin's assemblies using reflection,
