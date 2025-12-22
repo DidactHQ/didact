@@ -11,7 +11,8 @@ namespace DidactCore.Flows
     public interface IFlowConfigurator
     {
         /// <summary>
-        /// The Flow's name.
+        /// The Flow's name. Flow names must be unique per Environment.
+        /// If name is null, then the Flow's TypeName will be used in its place.
         /// </summary>
         string? Name { get; }
 
@@ -24,11 +25,6 @@ namespace DidactCore.Flows
         /// The Flow's version.
         /// </summary>
         string Version { get; }
-
-        /// <summary>
-        /// The Flow's Type name.
-        /// </summary>
-        string? TypeName { get; }
 
         /// <summary>
         /// The designated queue type that the Flow will execute against.
@@ -65,13 +61,6 @@ namespace DidactCore.Flows
         /// <param name="version"></param>
         /// <returns></returns>
         IFlowConfigurator AsVersion(string version);
-
-        /// <summary>
-        /// Sets the Flow Type name.
-        /// </summary>
-        /// <param name="typeName"></param>
-        /// <returns></returns>
-        IFlowConfigurator WithTypeName(string typeName);
 
         /// <summary>
         /// Sets the Flow to execute for a specific queue type and queue.
