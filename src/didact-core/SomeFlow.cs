@@ -13,7 +13,7 @@ namespace DidactCore
                 .WithDescription("A sample flow")
                 .AsVersion("1.0.0")
                 .WithCronScheduleTrigger(new CronScheduleTrigger("test"));
-
+            
             return Task.FromResult(context);
         }
 

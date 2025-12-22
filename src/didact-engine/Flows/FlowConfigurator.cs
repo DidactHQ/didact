@@ -12,8 +12,6 @@ namespace DidactEngine.Flows
 
         public string Version { get; private set; } = DidactCore.Constants.Defaults.DefaultFlowVersion;
 
-        public string? TypeName { get; private set; }
-
         public string DefaultQueueType { get; private set; } = QueueTypes.HyperQueue;
 
         public string DefaultQueueName { get; private set; } = DidactCore.Constants.Defaults.DefaultQueueName;
@@ -35,12 +33,6 @@ namespace DidactEngine.Flows
         public IFlowConfigurator AsVersion(string version)
         {
             Version = version;
-            return this;
-        }
-
-        public IFlowConfigurator WithTypeName(string typeName)
-        {
-            TypeName = typeName;
             return this;
         }
 
