@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using DidactCore.Entities;
+using DidactCore.Flows;
 
-namespace DidactCore.Flows
+namespace DidactEngine.Flows
 {
     public interface IFlowRepository
     {
