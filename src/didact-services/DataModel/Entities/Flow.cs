@@ -11,15 +11,13 @@ namespace DidactServices.DataModel.Entities
 
         public long DeploymentId { get; set; }
 
-        public string? Name { get; set; }
+        public string Name { get; set; } = null!;
 
         public string? Description { get; set; }
 
         public string TypeName { get; set; } = null!;
 
         public int ExecutionModeId { get; set; }
-
-        public int ConcurrencyLimit { get; set; }
 
         public string DefaultQueueType { get; set; } = null!;
 
