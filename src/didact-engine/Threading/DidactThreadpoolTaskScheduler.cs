@@ -1,7 +1,6 @@
-﻿using DidactEngine.Threading;
-using System.Collections.Concurrent;
+﻿using System.Collections.Concurrent;
 
-namespace DidactCore.Threading
+namespace DidactEngine.Threading
 {
     public class DidactThreadpoolTaskScheduler : TaskScheduler
     {
