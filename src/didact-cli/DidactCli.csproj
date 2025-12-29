@@ -8,8 +8,7 @@
 	<PublishSingleFile>true</PublishSingleFile>
 	<SelfContained>true</SelfContained>
 	<IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
-	<PublishTrimmed>false</PublishTrimmed> <!-- Avoid trimming to ensure all dependencies are included -->
-	<EnableCompressionInSingleFile>true</EnableCompressionInSingleFile> <!-- Optional: Compress output -->
+	<DebugType>embedded</DebugType>
 	<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies> <!-- Ensure all NuGet assemblies are included -->
   </PropertyGroup>
 
