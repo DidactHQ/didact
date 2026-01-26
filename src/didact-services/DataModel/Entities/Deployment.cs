@@ -14,13 +14,9 @@ namespace DidactServices.DataModel.Entities
 
         public long EnvironmentId { get; set; }
 
-        public string? Name { get; set; }
-
-        public string? Description { get; set; }
+        public string Name { get; set; } = null!;
 
         public string Entrypoint { get; set; } = null!;
-
-        public Guid PushId { get; set; }
 
         public DateTime Created { get; set; }
 
