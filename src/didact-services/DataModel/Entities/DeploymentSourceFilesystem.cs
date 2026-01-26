@@ -10,7 +10,7 @@ namespace DidactServices.DataModel.Entities
 
         public long EnvironmentId { get; set; }
 
-        public string FolderPath { get; set; } = null!;
+        public string Path { get; set; } = null!;
 
         public DateTime Created { get; set; }
 
