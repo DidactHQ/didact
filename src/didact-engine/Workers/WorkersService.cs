@@ -3,10 +3,10 @@ using DidactEngine.Constants;
 using DidactEngine.Flows;
 using DidactEngine.Logging;
 using DidactEngine.Plugins;
-using DidactServices.FlowRuns;
-using DidactServices.Workers;
-using DidactServices.Mapping;
 using DidactEngine.Threading;
+using DidactDomain.FlowRuns;
+using DidactDomain.Workers;
+using DidactDomain.Mapping;
 
 namespace DidactEngine.Workers
 {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace DidactCore.Flows
+namespace DidactEngine.Flows
 {
     [Serializable]
     public class FlowTypeNotFoundException : Exception

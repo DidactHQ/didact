@@ -1,4 +1,4 @@
-﻿namespace DidactCore.Flows
+﻿namespace DidactEngine.Flows
 {
     public class FlowRunRepository
     {
