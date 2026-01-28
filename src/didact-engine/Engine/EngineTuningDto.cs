@@ -1,4 +1,4 @@
-﻿namespace DidactCore.Engine
+﻿namespace DidactEngine.Engine
 {
     public class EngineTuningDto
     {

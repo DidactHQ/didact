@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 
-namespace DidactCore.Engine
+namespace DidactEngine.Engine
 {
     public class EngineRepository : IEngineRepository
     {

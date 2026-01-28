@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace DidactCore.Exceptions
+namespace DidactEngine.Flows
 {
     [Serializable]
     public class SaveFlowConfigurationsException : Exception

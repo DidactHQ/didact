@@ -6,7 +6,7 @@ using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace DidactCore.Engine
+namespace DidactEngine.Engine
 {
     public class EngineSupervisor : IEngineSupervisor
     {
