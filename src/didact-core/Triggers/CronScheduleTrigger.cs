@@ -1,4 +1,4 @@
-﻿using DidactCore.Constants;
+﻿using DidactPrimitives.Constants;
 
 namespace DidactCore.Triggers
 {
