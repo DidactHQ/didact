@@ -30,7 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\didact-services\DidactServices.csproj" />
+    <ProjectReference Include="..\didact-domain\DidactDomain.csproj" />
   </ItemGroup>
 
 </Project>
