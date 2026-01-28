@@ -1,5 +1,5 @@
-using DidactCore.Threading;
 using DidactEngine.Constants;
+using DidactEngine.Deployments;
 using DidactEngine.Engine;
 using DidactEngine.Logging;
 using DidactEngine.Modules;
@@ -182,6 +182,9 @@ builder.Services.AddSwaggerGen(options =>
 });
 builder.Services.AddEndpointsApiExplorer();
 
+// Register deployment types.
+builder.Services.AddSingleton<DeploymentsService>();
+
 // Register engine types.
 builder.Services.AddSingleton<IEngineService, EngineService>();
 
@@ -192,6 +195,9 @@ builder.Services.AddSingleton<FlowRunLogChannel>();
 // Register plugin types.
 builder.Services.AddSingleton<IPluginContainers, PluginContainers>();
 builder.Services.AddTransient<IPluginDependencyInjector, PluginDependencyInjector>();
+builder.Services.AddSingleton<IPluginContainerFactory, PluginContainerFactory>();
+builder.Services.AddTransient<PluginAssemblyLoadContext>();
+builder.Services.AddSingleton<PluginsService>();
 
 // Register scheduler types.
 builder.Services.AddSingleton<SchedulerService>();
