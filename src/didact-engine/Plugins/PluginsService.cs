@@ -1,4 +1,4 @@
-﻿using DidactServices.Workers;
+﻿using DidactDomain.Workers;
 using System.Collections.Concurrent;
 
 namespace DidactEngine.Plugins

@@ -1,3 +1,6 @@
+using DidactDomain.Constants;
+using DidactDomain.DataModel.Contexts;
+using DidactDomain.HostAppEnvironments;
 using DidactEngine.Constants;
 using DidactEngine.Deployments;
 using DidactEngine.Engine;
@@ -8,9 +11,6 @@ using DidactEngine.Scheduler;
 using DidactEngine.System;
 using DidactEngine.Threading;
 using DidactEngine.Workers;
-using DidactServices.Constants;
-using DidactServices.DataModel.Contexts;
-using DidactServices.HostAppEnvironments;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
