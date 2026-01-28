@@ -6,7 +6,6 @@ namespace DidactEngine.Logging
     public class EngineLoggerModule : IModule
     {
         private readonly EngineLogChannel _engineChannel;
-        private readonly IEngineLogRepository _repository;
 
         public string Name => EngineConstants.ModuleNames.EngineLogger;
 
@@ -16,17 +15,16 @@ namespace DidactEngine.Logging
 
         public int IntervalDelay { get; set; } = Defaults.DefaultModuleIntervalDelays.EngineLogger;
 
-        public EngineLoggerModule(EngineLogChannel channel, IEngineLogRepository repository)
+        public EngineLoggerModule(EngineLogChannel channel)
         {
             _engineChannel = channel;
-            _repository = repository;
         }
 
         public async Task ExecuteAsync(CancellationToken token)
         {
             await foreach (var log in _engineChannel.Channel.Reader.ReadAllAsync(token))
             {
-                await _repository.InsertLogAsync(log, token);
+                // TODO Implement Serilog or other logging utilities.
             }
         }
     }
