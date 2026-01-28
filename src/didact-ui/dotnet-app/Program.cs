@@ -1,5 +1,5 @@
-using DidactServices.Constants;
-using DidactServices.HostAppEnvironments;
+using DidactDomain.Constants;
+using DidactDomain.HostAppEnvironments;
 using DidactUi.Constants;
 using DidactUi.Exceptions;
 using DidactUi.Services;
