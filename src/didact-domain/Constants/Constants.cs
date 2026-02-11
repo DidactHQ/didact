@@ -9,12 +9,8 @@
             public const string DidactCli = "Didact CLI";
         }
 
-        public static class ApplicationConfigurationFileNames
-        {
-            public const string DidactCli = "cliconfig.json";
-            public const string DidactUi = "uiconfig.json";
-            public const string DidactEngine = "engineconfig.json";
-        }
+        public const string ConfigFileName = "didact.config.json";
+        public const string DeploymentsFileName = "didact.deployments.json";
 
         public static class Defaults
         {
