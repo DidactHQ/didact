@@ -6,10 +6,8 @@ import Aura from '@primeuix/themes/aura';
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
-  modules: [
-    '@primevue/nuxt-module'
-  ],
-  css: ['~/assets/css/main.css'],
+  modules: ['@primevue/nuxt-module', 'shadcn-nuxt'],
+  css: ['./app/assets/css/main.css'],
   vite: {
     plugins: [
       tailwindcss(),
@@ -20,6 +18,27 @@ export default defineNuxtConfig({
     output: {
       publicDir: '../dotnet-app/wwwroot'
     }
+  },
+  app: {
+    head: {
+      htmlAttrs: {
+        class: 'dark'
+      }
+    }
+  },
+  shadcn: {
+    /**
+     * Prefix for all the imported component.
+     * @default "Ui"
+     */
+    prefix: '',
+    /**
+     * Directory that the component lives in.
+     * Will respect the Nuxt aliases.
+     * @link https://nuxt.com/docs/api/nuxt-config#alias
+     * @default "@/components/ui"
+     */
+    componentDir: '@/components/ui'
   },
   primevue: {
     options: {
