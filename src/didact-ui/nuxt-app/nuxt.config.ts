@@ -6,15 +6,21 @@ import Aura from '@primeuix/themes/aura';
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
+  modules: [
+    '@primevue/nuxt-module'
+  ],
+  css: ['~/assets/css/main.css'],
   vite: {
     plugins: [
       tailwindcss(),
     ],
   },
-  css: ['~/assets/css/main.css'],
-  modules: [
-    '@primevue/nuxt-module'
-  ],
+  ssr: false,
+  nitro: {
+    output: {
+      publicDir: '../dotnet-app/wwwroot'
+    }
+  },
   primevue: {
     options: {
         theme: {
@@ -28,12 +34,6 @@ export default defineNuxtConfig({
       // Also need to exclude Editor and Chart because of weird build issues.
       // See https://github.com/primefaces/primevue-nuxt-module/issues/16#issuecomment-1794482993.
       exclude: ['Form', 'FormField', 'Editor', 'Chart']
-    }
-  },
-  ssr: false,
-  nitro: {
-    output: {
-      publicDir: '../dotnet-app/DidactUi/wwwroot'
     }
   }
 })
