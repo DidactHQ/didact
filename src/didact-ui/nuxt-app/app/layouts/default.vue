@@ -1,5 +1,11 @@
 <template>
-    <div class="bg-neutral-950 h-screen w-screen flex flex-row">
+  <SidebarProvider>
+    <AppSidebar />
+    <div class="flex flex-col w-full">
+      <AppTopbar />
+      <PageContainer>
         <slot />
+      </PageContainer>
     </div>
+  </SidebarProvider>
 </template>
