@@ -21,7 +21,14 @@ export default defineNuxtConfig({
     head: {
       htmlAttrs: {
         class: 'dark'
-      }
+      },
+      link: [
+        {
+          rel: 'icon',
+          type: 'image/x-icon',
+          href: '/didact-logo.png'
+        }
+      ]
     }
   },
   shadcn: {
