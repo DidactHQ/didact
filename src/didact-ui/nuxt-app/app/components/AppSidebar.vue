@@ -1,15 +1,15 @@
 <template>
   <Sidebar collapsible="icon">
 
-    <SidebarHeader class="pt-4">
-        <NuxtLink to="/" class="flex flex-row items-center">
+    <SidebarHeader class="flex flex-col pt-2 justify-items-center">
+        <NuxtLink to="/" class="py-4 flex flex-row items-center">
           <img src="/didact-logo.png" width="31" height="31" class="mr-2" />
-          <span class="text-2xl font-semibold" v-if="open">Didact</span>
+          <span class="text-2xl font-semibold" v-show="open">Didact</span>
         </NuxtLink>
     </SidebarHeader>
 
     <SidebarContent>
-      <SidebarGroup v-if="open" class="mt-2">
+      <SidebarGroup v-show="open" class="mt-2">
         <EnvironmentCombobox />
       </SidebarGroup>
       <SidebarGroup>
@@ -17,8 +17,8 @@
         <SidebarGroupContent>
           <SidebarMenu>
             <SidebarMenuItem v-for="item in items" :key="item.title">
-              <SidebarMenuButton as-child>
-                <NuxtLink :to="item.url">
+              <SidebarMenuButton as-child :is-active="isActiveRoute(item.path)">
+                <NuxtLink :to="item.path">
                   <!-- <component :is="item.icon" /> -->
                   <img :src="'/' + item.iconFilename" width="17" height="17" />
                   <span>{{ item.title }}</span>
@@ -70,54 +70,62 @@
 import { Calendar, Home, Inbox, Search, Settings } from 'lucide-vue-next'
 import { useSidebar } from './ui/sidebar';
 const { open } = useSidebar();
+const route = useRoute();
+
+const isActiveRoute = (path: string) => {
+  if (path === '/')
+    return route.path === '/';
+  
+  return route.path.includes(path);
+}
 
 // Menu items.
 const items = [
   {
     title: 'Dashboard',
-    url: '/',
+    path: '/',
     icon: Home,
     iconFilename: 'dashboard-icon.png'
   },
   {
     title: 'Flows',
-    url: '/flows',
+    path: '/flows',
     icon: Inbox,
     iconFilename: 'flows-icon.png'
   },
   {
     title: 'Flowruns',
-    url: '/flowruns',
+    path: '/flowruns',
     icon: Calendar,
     iconFilename: 'flow-runs-icon.png'
   },
   {
     title: 'Deployments',
-    url: '/deployments',
+    path: '/deployments',
     icon: Search,
     iconFilename: 'deployments-icon.png'
   },
   {
     title: 'Engines',
-    url: '/engines',
+    path: '/engines',
     icon: Search,
     iconFilename: 'engines-icon.png'
   },
   {
     title: 'Variables',
-    url: '/variables',
+    path: '/variables',
     icon: Search,
     iconFilename: 'variables-icon.png'
   },
   {
     title: 'Secrets',
-    url: '/secrets',
+    path: '/secrets',
     icon: Settings,
     iconFilename: 'secrets-icon.png'
   },
   {
     title: 'Alerts',
-    url: '/alerts',
+    path: '/alerts',
     icon: Settings,
     iconFilename: 'alerts-icon.png'
   }
