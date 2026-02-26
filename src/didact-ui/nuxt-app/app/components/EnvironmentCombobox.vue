@@ -8,8 +8,8 @@
         class="w-[200px] justify-between"
       >
         {{
-          value
-            ? environments.find(environment => environment.id === value)?.name
+            environments.find(environment => environment.id === selectedEnvironment.id)?.name
+            ? environments.find(environment => environment.id === selectedEnvironment.id)?.name
             : 'Select environment...'
         }}
         <ChevronsUpDownIcon class="ml-2 h-4 w-4 shrink-0 opacity-50" />
@@ -25,15 +25,12 @@
               v-for="environment in environments"
               :key="environment.id"
               :value="environment.id"
-              @select="() => {
-                value = value === environment.id ? 0 : environment.id
-                open = false
-              }"
+              @select="selectEnvironment(environment)"
             >
               <CheckIcon
                 :class="cn(
                   'mr-2 h-4 w-4',
-                  value === environment.id ? 'opacity-100' : 'opacity-0',
+                  selectedEnvironment.id === environment.id ? 'opacity-100' : 'opacity-0',
                 )"
               />
               {{ environment.name }}
@@ -48,10 +45,13 @@
 <script setup lang="ts">
 import { CheckIcon, ChevronsUpDownIcon } from 'lucide-vue-next'
 import { cn } from '@/lib/utils'
-const { getEnvironments } = useEnvironments()
-
-const environments = await getEnvironments();
+const { getEnvironments, selectedEnvironment } = useEnvironments()
 
 const open = ref(false)
-const value = ref(0)
+const environments = await getEnvironments();
+
+const selectEnvironment = (environment: Environment) => {
+  selectedEnvironment.value = environment;
+  open.value = false;
+}
 </script>

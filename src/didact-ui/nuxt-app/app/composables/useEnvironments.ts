@@ -1,8 +1,6 @@
 export const useEnvironments = () => {
-  interface Environment {
-    id: number;
-    name: string;
-  }
+
+  const selectedEnvironment = ref<Environment>({ id: 1, name: 'Development' });
 
   const getEnvironments = async (): Promise<Environment[]> => {
     return Promise.resolve([
@@ -13,6 +11,7 @@ export const useEnvironments = () => {
   }
   
   return {
+    selectedEnvironment,
     getEnvironments
   }
 }
