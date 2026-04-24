@@ -1,6 +1,6 @@
 ﻿using Spectre.Console.Cli;
 
-namespace DidactCli.Services;
+namespace DidactCli.DependencyInjection;
 
 public sealed class TypeResolver : ITypeResolver, IDisposable
 {

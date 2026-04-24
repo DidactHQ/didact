@@ -1,7 +1,8 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using DidactCli.Services;
+using Microsoft.Extensions.DependencyInjection;
 using Spectre.Console.Cli;
 
-namespace DidactCli.Services;
+namespace DidactCli.DependencyInjection;
 
 public sealed class TypeRegistrar : ITypeRegistrar
 {
