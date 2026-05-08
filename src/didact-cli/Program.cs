@@ -1,5 +1,6 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using DidactCli.Commands;
+using DidactCli.DependencyInjection;
 using DidactCli.Services;
 using DidactDomain.Constants;
 using DidactDomain.HostAppEnvironments;
