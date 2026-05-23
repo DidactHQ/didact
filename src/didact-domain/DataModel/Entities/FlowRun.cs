@@ -23,15 +23,17 @@ namespace DidactDomain.DataModel.Entities
 
         public string? JsonPayload { get; set; }
 
+        public long? ParentFlowRunId { get; set; }
+
         public int TimeoutSeconds { get; set; }
 
         public int StateId { get; set; }
 
         public DateTime? ExecuteAt { get; set; }
 
-        public DateTime? ExecutionStarted { get; set; }
+        public DateTime? ExecutionStartedAt { get; set; }
 
-        public DateTime? ExecutionEnded { get; set; }
+        public DateTime? ExecutionEndedAt { get; set; }
 
         public DateTime Created { get; set; }
 
