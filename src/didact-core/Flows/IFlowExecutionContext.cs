@@ -1,5 +1,8 @@
 ﻿using DidactCore.Deployments;
+using DidactCore.Director;
 using DidactCore.Environments;
+using DidactCore.Steps;
+using System.Collections.Generic;
 using System.Threading;
 
 namespace DidactCore.Flows
@@ -19,5 +22,7 @@ namespace DidactCore.Flows
         IFlowContext FlowContext { get; }
 
         IFlowRunContext FlowRunContext { get; }
+
+        ICollection<IStepContext> StepContexts { get; }
     }
 }
