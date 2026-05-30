@@ -1,5 +1,6 @@
 ﻿using DidactCore.Constants;
-using DidactCore.Triggers;
+using DidactCore.Schedules;
+using System;
 using System.Collections.Generic;
 
 namespace DidactCore.Flows
@@ -14,7 +15,7 @@ namespace DidactCore.Flows
         /// The Flow's name. Flow names must be unique per Environment.
         /// If name is null, then the Flow's TypeName will be used in its place.
         /// </summary>
-        string? Name { get; }
+        string Name { get; }
 
         /// <summary>
         /// The Flow's description.
@@ -26,6 +27,8 @@ namespace DidactCore.Flows
         /// </summary>
         string Version { get; }
 
+        IDictionary<string, IScheduleBuilder> ScheduleBuilders { get; }
+
         /// <summary>
         /// The designated queue type that the Flow will execute against.
         /// </summary>
@@ -35,11 +38,6 @@ namespace DidactCore.Flows
         /// The designated queue that the Flow will execute against.
         /// </summary>
         string DefaultQueueName { get; }
-
-        /// <summary>
-        /// The collection of Cron Scheduler triggers for the Flow.
-        /// </summary>
-        ICollection<ICronScheduleTrigger> CronScheduleTriggers { get; }
 
         /// <summary>
         /// Sets the Flow name.
@@ -70,11 +68,12 @@ namespace DidactCore.Flows
         /// <returns></returns>
         IFlowConfigurator WithDefaultQueue(string queueType, string queueName = Defaults.DefaultQueueName);
 
-        /// <summary>
-        /// Adds the Cron Schedule trigger to the Flow's Cron Schedule trigger collection.
-        /// </summary>
-        /// <param name="cronScheduleTrigger"></param>
-        /// <returns></returns>
-        IFlowConfigurator WithCronScheduleTrigger(ICronScheduleTrigger cronScheduleTrigger);
+        IFlowConfigurator UseCronSchedule(string name, string cronExpression);
+
+        IFlowConfigurator UseCronSchedule(Action<ICronScheduleBuilder> configure);
+
+        IFlowConfigurator UseOneTimeSchedule(string name, DateTime executeAt);
+
+        IFlowConfigurator UseOneTimeSchedule(Action<IOneTimeScheduleBuilder> configure);
     }
 }
