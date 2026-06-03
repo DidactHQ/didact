@@ -2,6 +2,7 @@
 using DidactCore.Director;
 using DidactCore.Environments;
 using DidactCore.Steps;
+using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Threading;
 
@@ -11,7 +12,7 @@ namespace DidactCore.Flows
     {
         CancellationToken CancellationToken { get; }
 
-        IFlowLogger Logger { get; }
+        ILogger Logger { get; }
 
         IDirector Director { get; }
 

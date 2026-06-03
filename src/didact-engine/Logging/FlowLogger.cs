@@ -2,7 +2,7 @@
 
 namespace DidactEngine.Logging
 {
-    public class FlowLogger : IFlowLogger
+    public class FlowLogger
     {
     }
 }
