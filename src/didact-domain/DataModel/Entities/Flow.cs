@@ -19,6 +19,8 @@ namespace DidactDomain.DataModel.Entities
 
         public int ExecutionModeId { get; set; }
 
+        public int DeferExecutionSeconds { get; set; }
+
         public string DefaultQueueType { get; set; } = null!;
 
         public string DefaultQueueName { get; set; } = null!;
