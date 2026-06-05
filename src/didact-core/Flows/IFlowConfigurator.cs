@@ -27,6 +27,11 @@ namespace DidactCore.Flows
         /// </summary>
         string Version { get; }
 
+        /// <summary>
+        /// The default delay that should be applied to a FlowRun of this Flow.
+        /// </summary>
+        long DeferExecutionSeconds { get; }
+
         IDictionary<string, IScheduleBuilder> ScheduleBuilders { get; }
 
         /// <summary>
@@ -67,6 +72,8 @@ namespace DidactCore.Flows
         /// <param name="queueName"></param>
         /// <returns></returns>
         IFlowConfigurator WithDefaultQueue(string queueType, string queueName = Defaults.DefaultQueueName);
+
+        IFlowConfigurator DeferExecutionBy(TimeSpan deferBy);
 
         IFlowConfigurator UseCronSchedule(string name, string cronExpression);
 
