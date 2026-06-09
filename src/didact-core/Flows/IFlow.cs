@@ -9,7 +9,7 @@ namespace DidactCore.Flows
         /// </summary>
         /// <param name="flowConfigurator"></param>
         /// <returns></returns>
-        Task<IFlowConfigurationContext> ConfigureAsync(IFlowConfigurationContext context);
+        Task ConfigureAsync(IFlowConfigurationContext context);
 
         /// <summary>
         /// Asynchronously executes the Flow.
