@@ -82,5 +82,9 @@ namespace DidactCore.Flows
         IFlowConfigurator UseOneTimeSchedule(string name, DateTime executeAt);
 
         IFlowConfigurator UseOneTimeSchedule(Action<IOneTimeScheduleBuilder> configure);
+
+        IFlowConfigurator WithRetryPolicy(Action<IRetryPolicyBuilder> configure);
+
+        IFlowConfigurator WithoutRetries();
     }
 }
