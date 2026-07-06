@@ -6,7 +6,7 @@
                 class="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground cursor-pointer"
             >
                 <Avatar class="h-8 w-8 rounded-lg" alt="user">
-                <img src="/user-icon.png" alt="user-icon" width="32" height="32" class="rounded-full p-1 bg-neutral-700" />
+                    <img src="/user-icon.png" alt="user-icon" width="32" height="32" class="rounded-full p-1 bg-neutral-700" />
                 </Avatar>
                 <!-- <ChevronsUpDown class="ml-auto size-4" /> -->
             </SidebarMenuButton>
@@ -19,22 +19,19 @@
         >
             <DropdownMenuLabel class="p-0 font-normal">
                 <div class="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-                <Avatar class="h-8 w-8 rounded-lg">
+                <!-- <Avatar class="h-8 w-8 rounded-lg">
                     <AvatarFallback class="rounded-lg">
                     CN
                     </AvatarFallback>
+                </Avatar> -->
+                <Avatar class="h-8 w-8 rounded-lg" alt="user">
+                    <img src="/user-icon.png" alt="user-icon" width="32" height="32" class="rounded-full p-1 bg-neutral-700" />
                 </Avatar>
+                <span>{{ username }}</span>
                 <div class="grid flex-1 text-left text-sm leading-tight">
                 </div>
                 </div>
             </DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuGroup>
-                <DropdownMenuItem>
-                <Sparkles />
-                Upgrade to Pro
-                </DropdownMenuItem>
-            </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
                 <DropdownMenuItem>
@@ -50,7 +47,6 @@
                 Notifications
                 </DropdownMenuItem>
             </DropdownMenuGroup>
-            <DropdownMenuSeparator />
             <DropdownMenuItem>
                 <LogOut />
                 Log out
@@ -60,5 +56,6 @@
 </template>
 
 <script setup lang="ts">
-import { ChevronsUpDown, LogOut } from 'lucide-vue-next';
+import { ChevronsUpDown, LogOut, Sparkles } from 'lucide-vue-next';
+const { username } = useUser();
 </script>
