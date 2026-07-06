@@ -22,15 +22,23 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.1" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.1" />
-    <PackageReference Include="Microsoft.Extensions.Logging" Version="9.0.1" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="9.0.1" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.2" />
     <PackageReference Include="Spectre.Console" Version="0.49.1" />
     <PackageReference Include="Spectre.Console.Cli" Version="0.49.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\didact-domain\DidactDomain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Deployments\" />
+    <Folder Include="Environments\" />
+    <Folder Include="Database\" />
+    <Folder Include="Installation\" />
+    <Folder Include="Licensing\" />
+    <Folder Include="EncryptionKey\" />
+    <Folder Include="Versioning\" />
   </ItemGroup>
 
 </Project>
