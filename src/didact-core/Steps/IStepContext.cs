@@ -8,6 +8,6 @@
 
         string StepName { get; }
 
-        string Status { get; }
+        string? State { get; }
     }
 }
