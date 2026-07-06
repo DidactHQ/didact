@@ -42,12 +42,22 @@
               </SidebarMenuButton>
             </SidebarMenuItem>
 
-            <SidebarMenuItem>
+            <!-- <SidebarMenuItem>
               <SidebarMenuButton as-child>
                 <NuxtLink to="/api">
-                  <!-- <component :is="item.icon" /> -->
+                  <component :is="item.icon" />
                   <img src="/api-icon.png" width="17" height="17" />
                   <span>API Doc</span>
+                </NuxtLink>
+              </SidebarMenuButton>
+            </SidebarMenuItem> -->
+
+            <SidebarMenuItem>
+              <SidebarMenuButton as-child>
+                <NuxtLink to="/help">
+                  <!-- <component :is="item.icon" /> -->
+                  <img src="/help-icon.png" width="17" height="17" />
+                  <span>Help</span>
                 </NuxtLink>
               </SidebarMenuButton>
             </SidebarMenuItem>
@@ -104,6 +114,12 @@ const items = [
     path: '/deployments',
     icon: Search,
     iconFilename: 'deployments-icon.png'
+  },
+  {
+    title: 'Queues',
+    path: '/queues',
+    icon: Search,
+    iconFilename: 'queues-icon.png'
   },
   {
     title: 'Engines',
