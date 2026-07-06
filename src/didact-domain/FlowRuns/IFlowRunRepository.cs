@@ -1,4 +1,6 @@
-﻿using System.Threading;
+﻿using DidactCore.Flows;
+using System;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace DidactDomain.FlowRuns
@@ -7,13 +9,13 @@ namespace DidactDomain.FlowRuns
     {
         Task<FlowRunWorkerContextDto> DequeueFlowRunWithWorkerContextAsync(CancellationToken cancellationToken);
 
-        Task<FlowRun> GetFlowRunAsync(long flowRunId);
+        Task<IFlowRunContext> GetFlowRunAsync(long flowRunId);
 
-        Task<FlowRun> GetFlowRunByNameAsync(string name);
+        Task<IFlowRunContext> CreateFlowRunAsync(string flowName, string? jsonPayload, DateTime? executeAt);
 
-        Task<FlowRun> CreateAndEnqueueFlowRunAsync(FlowRun flowRun);
+        Task<IFlowRunContext> CreateSubflowRunAsync(string flowName, string? jsonPayload, DateTime? executeAt);
 
-        Task<FlowRun> CreateAndExecuteFlowRunAsync(FlowRun flowRun);
+        Task<IFlowRunContext> TransitionFlowRunStateAsync(long flowRunId, string flowRunStateName);
 
         Task DeleteFlowRunAsync(long flowRunId);
 

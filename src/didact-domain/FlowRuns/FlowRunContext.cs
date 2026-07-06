@@ -1,6 +1,8 @@
-﻿namespace DidactDomain.FlowRuns
+﻿using DidactCore.Flows;
+
+namespace DidactDomain.FlowRuns
 {
-    public class FlowRunContext
+    public class FlowRunContext : IFlowRunContext
     {
         public long FlowRunId { get; set; }
 
