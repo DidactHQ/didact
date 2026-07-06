@@ -8,5 +8,7 @@ namespace DidactDomain.Steps
         Task<IStepContext> GetStepAsync(long stepId);
 
         Task<IStepContext> GetOrCreateStepAsync(long flowRunId, string stepName);
+
+        Task<IStepContext> TransitionStepStateAsync(long stepId, string stepStateName);
     }
 }
