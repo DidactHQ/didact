@@ -28,7 +28,7 @@ namespace DidactDomain.DataModel.Contexts
 
         public virtual DbSet<HyperQueueItem> HyperQueueItems { get; set; } = null!;
 
-        public virtual DbSet<State> States { get; set; } = null!;
+        public virtual DbSet<FlowRunState> States { get; set; } = null!;
 
         public virtual DbSet<TriggerType> TriggerTypes { get; set; } = null!;
 

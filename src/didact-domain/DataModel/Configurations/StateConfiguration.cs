@@ -4,9 +4,9 @@ using DidactDomain.DataModel.Entities;
 
 namespace DidactDomain.DataModel.Configurations
 {
-    public partial class StateConfiguration : IEntityTypeConfiguration<State>
+    public partial class StateConfiguration : IEntityTypeConfiguration<FlowRunState>
     {
-        public void Configure(EntityTypeBuilder<State> entity)
+        public void Configure(EntityTypeBuilder<FlowRunState> entity)
         {
             //entity.ToTable(nameof(State));
             //entity.Property(e => e.Name).IsRequired().HasMaxLength(255);
@@ -18,6 +18,6 @@ namespace DidactDomain.DataModel.Configurations
             OnConfigurePartial(entity);
         }
 
-        partial void OnConfigurePartial(EntityTypeBuilder<State> entity);
+        partial void OnConfigurePartial(EntityTypeBuilder<FlowRunState> entity);
     }
 }
