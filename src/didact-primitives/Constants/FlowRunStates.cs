@@ -11,7 +11,7 @@
         public static class Pending
         {
             public const string Name = "Pending";
-            public const string Description = "The FlowRun has been enqueued and is awaiting execution.";
+            public const string Description = "The FlowRun has been enqueued and is awaiting imminent execution.";
         }
 
         public static class Running
