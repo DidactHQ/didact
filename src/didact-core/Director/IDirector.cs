@@ -20,5 +20,9 @@ namespace DidactCore.Director
         Task ExecuteStepAsync(string name, Func<IStepExecutionContext, Task> function);
 
         Task<TOutput> ExecuteStepAsync<TOutput>(string name, Func<IStepExecutionContext, Task<TOutput>> function);
+
+        Task SuspendFor(string name, TimeSpan duration);
+
+        Task SuspendUntil(string name, DateTime resumeAt);
     }
 }
