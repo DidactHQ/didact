@@ -3,10 +3,10 @@
     public static class FlowRunEventTypes
     {
         public const string LogEvent = "Log Event";
-        public const string StateChangeEvent = "State Change Event";
-        public const string EngineEvent = "Engine Event";
-        public const string SchedulerEvent = "Scheduler Event";
-        public const string TriggerEvent = "Trigger Event";
-        public const string BlockRunEvent = "Block Run Event";
+        public const string FlowRunStateChangeEvent = "FlowRun State Change Event";
+        public const string FlowRunAttemptIncrementEvent = "FlowRun Attempt Increment Event";
+        public const string InstantiatedEvent = "Instantiated Event";
+        public const string StepStateChangeEvent = "Step State Change Event";
+        public const string StepAttemptIncrementEvent = "Step Attempt Increment Event";
     }
 }
