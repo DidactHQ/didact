@@ -2,9 +2,10 @@
 {
     public static class TriggerTypes
     {
-        public const string API = "API";
-        public const string UI = "UI";
-        public const string CronSchedule = "CRON Schedule";
-        public const string FlowRun = "Flow Run";
+        public const string Api = "Api";
+        public const string Dashboard = "Dashboard";
+        public const string Cli = "Cli";
+        public const string Schedule = "Schedule";
+        public const string FlowRun = "FlowRun";
     }
 }
