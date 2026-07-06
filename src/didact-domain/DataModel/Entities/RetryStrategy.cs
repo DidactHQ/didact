@@ -2,19 +2,13 @@
 
 namespace DidactDomain.DataModel.Entities
 {
-    public class FlowRunStateChangeEvent
+    public class RetryStrategy
     {
-        public long FlowRunStateChangeEventId { get; set; }
+        public int RetryStrategyId { get; set; }
 
-        public long FlowRunEventId { get; set; }
+        public string Name { get; set; } = null!;
 
-        public long EnvironmentId { get; set; }
-
-        public string? PreviousState { get; set; }
-
-        public string? NewState { get; set; }
-
-        public DateTime Timestamp { get; set; }
+        public string Description { get; set; } = null!;
 
         public DateTime Created { get; set; }
 

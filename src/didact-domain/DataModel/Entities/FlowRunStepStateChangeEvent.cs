@@ -2,9 +2,9 @@
 
 namespace DidactDomain.DataModel.Entities
 {
-    public class FlowRunStateChangeEvent
+    public class FlowRunStepStateChangeEvent
     {
-        public long FlowRunStateChangeEventId { get; set; }
+        public long FlowRunStepStateChangeEventId { get; set; }
 
         public long FlowRunEventId { get; set; }
 

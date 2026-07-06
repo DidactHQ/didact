@@ -9,8 +9,6 @@ namespace DidactDomain.DataModel.Entities
 
         public long FlowId { get; set; }
 
-        public long TriggerId { get; set; }
-
         public long FlowVersionId { get; set; }
 
         public long EnvironmentId { get; set; }
@@ -23,11 +21,15 @@ namespace DidactDomain.DataModel.Entities
 
         public string? JsonPayload { get; set; }
 
+        public int TriggerTypeId { get; set; }
+
         public long? ParentFlowRunId { get; set; }
 
         public int TimeoutSeconds { get; set; }
 
-        public int StateId { get; set; }
+        public int Attempt { get; set; }
+
+        public int FlowRunStateId { get; set; }
 
         public DateTime? ExecuteAt { get; set; }
 
@@ -53,13 +55,11 @@ namespace DidactDomain.DataModel.Entities
 
         public virtual Environment Environment { get; set; } = null!;
 
-        public virtual State State { get; set; } = null!;
+        public virtual FlowRunState FlowRunState { get; set; } = null!;
 
         public virtual Trigger Trigger { get; set; } = null!;
 
         public virtual ExecutionMode ExecutionMode { get; set; } = null!;
-
-        public virtual ICollection<BlockRun> BlockRuns { get; set; } = new List<BlockRun>();
 
         public virtual ICollection<HyperQueueItem> HyperQueueItems { get; } = new List<HyperQueueItem>();
 

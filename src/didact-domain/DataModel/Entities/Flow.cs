@@ -21,6 +21,16 @@ namespace DidactDomain.DataModel.Entities
 
         public int DeferExecutionSeconds { get; set; }
 
+        public int RetryStrategyId { get; set; }
+
+        public int RetryMaxAttempts { get; set; }
+        
+        public int RetryMaxDelaySeconds { get; set; }
+
+        public int RetryInitialDelaySeconds { get; set; }
+
+        public decimal RetryBackoffMultiplier { get; set; }
+
         public string DefaultQueueType { get; set; } = null!;
 
         public string DefaultQueueName { get; set; } = null!;

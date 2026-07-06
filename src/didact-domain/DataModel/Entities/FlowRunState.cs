@@ -1,20 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace DidactDomain.DataModel.Entities
 {
-    public class FlowRunStateChangeEvent
+    public class FlowRunState
     {
-        public long FlowRunStateChangeEventId { get; set; }
+        public int FlowRunStateId { get; set; }
 
-        public long FlowRunEventId { get; set; }
+        public string Name { get; set; } = null!;
 
-        public long EnvironmentId { get; set; }
-
-        public string? PreviousState { get; set; }
-
-        public string? NewState { get; set; }
-
-        public DateTime Timestamp { get; set; }
+        public string? Description { get; set; }
 
         public DateTime Created { get; set; }
 
@@ -27,5 +22,7 @@ namespace DidactDomain.DataModel.Entities
         public bool Active { get; set; }
 
         public byte[] RowVersion { get; set; } = null!;
+
+        public virtual ICollection<FlowRun> FlowRuns { get; } = new List<FlowRun>();
     }
 }
