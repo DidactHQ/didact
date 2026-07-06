@@ -30,9 +30,9 @@ namespace DidactDomain.Director
             _flowRunContext = flowRunContext;
         }
 
-        public async Task CreateSubflowRunAsync(string flowName, IFlowExecutionContext context, string? jsonPayload, DateTime? executeAt)
+        public async Task<IFlowRunContext> CreateSubflowRunAsync(string flowName, string? jsonPayload, DateTime? executeAt)
         {
-            _flowRunRepository.CreateSubflowRunAsync();
+            return await _flowRunRepository.CreateSubflowRunAsync(flowName, jsonPayload, executeAt);
         }
 
         public async Task ExecuteStepAsync(string name, Func<IStepExecutionContext, Task> function)
