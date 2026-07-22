@@ -1,21 +1,24 @@
-﻿namespace DidactEngine.Modules
+namespace DidactEngine.Modules
 {
     public interface IModule
     {
         string Name { get; }
-        
+
         bool Enabled { get; }
 
         /// <summary>
-        /// The number of concurrent module <see cref="Task"/>s that can be created in the module supervisor.
+        /// Modules that must be initialized before this module can start.
         /// </summary>
-        int Concurrency { get; }
+        IReadOnlyCollection<Type> Dependencies { get; }
 
         /// <summary>
-        /// The delay from one module loop iteration to the next. The unit is milliseconds.
+        /// Performs bounded startup work and returns when the module is ready to run.
         /// </summary>
-        int IntervalDelay { get; }
-        
-        Task ExecuteAsync(CancellationToken ct);
+        Task InitializeAsync(CancellationToken cancellationToken);
+
+        /// <summary>
+        /// Runs the module until engine cancellation or an unrecoverable failure.
+        /// </summary>
+        Task RunAsync(CancellationToken cancellationToken);
     }
 }
