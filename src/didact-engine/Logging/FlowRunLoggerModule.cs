@@ -1,20 +1,12 @@
-﻿using DidactEngine.Constants;
+using DidactEngine.Constants;
 using DidactEngine.Modules;
 
 namespace DidactEngine.Logging
 {
-    public class FlowRunLoggerModule : IModule
+    public sealed class FlowRunLoggerModule : ILongRunningModule
     {
         private readonly FlowRunLogChannel _flowRunLogChannel;
         private readonly IFlowLogRepository _repository;
-
-        public string Name => EngineConstants.ModuleNames.FlowRunLogger;
-
-        public bool Enabled { get; set; } = true;
-
-        public int Concurrency { get; set; } = 1;
-
-        public int IntervalDelay { get; set; } = Defaults.DefaultModuleIntervalDelays.FlowRunLogger;
 
         public FlowRunLoggerModule(FlowRunLogChannel flowRunLogChannel, IFlowLogRepository repository)
         {
@@ -22,13 +14,23 @@ namespace DidactEngine.Logging
             _repository = repository;
         }
 
-        public async Task ExecuteAsync(CancellationToken stoppingToken)
+        public string Name => EngineConstants.ModuleNames.FlowRunLogger;
+
+        public bool Enabled => true;
+
+        public IReadOnlyCollection<Type> Dependencies => Array.Empty<Type>();
+
+        public Task InitializeAsync(CancellationToken cancellationToken)
         {
-            await foreach (var log in _flowRunLogChannel.Channel.Reader.ReadAllAsync(stoppingToken))
+            return Task.CompletedTask;
+        }
+
+        public async Task RunAsync(CancellationToken cancellationToken)
+        {
+            await foreach (var log in _flowRunLogChannel.Channel.Reader.ReadAllAsync(cancellationToken))
             {
-                await _repository.InsertLogAsync(log, stoppingToken);
+                await _repository.InsertLogAsync(log, cancellationToken);
             }
         }
     }
-
 }
