@@ -1,5 +1,6 @@
 using DidactEngine.Constants;
 using DidactEngine.Modules;
+using DidactEngine.Plugins;
 
 namespace DidactEngine.Scheduler
 {
