@@ -59,12 +59,12 @@ namespace DidactEngine.Modules
         protected abstract Task PollAsync(CancellationToken cancellationToken);
 
         /// <summary>
-        /// Handles a recoverable polling failure. Override and rethrow when the failure is fatal.
+        /// Handles a recoverable polling failure. The default treats the failure as fatal.
+        /// Override only for exceptions the concrete module can safely recover from.
         /// </summary>
         protected virtual Task HandleTransientFailureAsync(Exception exception, CancellationToken cancellationToken)
         {
-            _logger.LogError(exception, "Polling module {ModuleName} failed during a polling iteration. Retrying.", Name);
-            return Task.CompletedTask;
+            return Task.FromException(exception);
         }
     }
 }
