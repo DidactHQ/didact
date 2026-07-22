@@ -1,59 +1,127 @@
-﻿using DidactEngine.Engine;
+using DidactEngine.Engine;
 
 namespace DidactEngine.Modules
 {
-    public class ModuleSupervisor : BackgroundService
+    public sealed class ModuleSupervisor : BackgroundService
     {
         private readonly ILogger<ModuleSupervisor> _logger;
-        private readonly IEnumerable<IModule> _modules;
+        private readonly IReadOnlyCollection<IModule> _modules;
         private readonly IEngineService _engineService;
 
         public ModuleSupervisor(IEnumerable<IModule> modules, ILogger<ModuleSupervisor> logger, IEngineService engineService)
         {
-            _modules = modules;
+            _modules = modules.ToArray();
             _logger = logger;
             _engineService = engineService;
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            /* Create a composite cancellation token that covers an engine shutdown event from the runtime
-             * as well as from manual engine polling.
-             */
-            using var compositeCancellationTokenSource = CancellationTokenSource.CreateLinkedTokenSource(stoppingToken, _engineService.CancellationToken);
-            var compositeCancellationToken = compositeCancellationTokenSource.Token;
+            using var engineCancellationTokenSource = CancellationTokenSource.CreateLinkedTokenSource(
+                stoppingToken,
+                _engineService.CancellationToken);
 
-            var moduleTasks = _modules
-                .Where(m => m.Enabled)
-                .SelectMany(m =>
-                    Enumerable.Range(0, m.Concurrency)
-                                .Select(i => RunModuleLoopAsync(new ModuleContext(m, i + 1, compositeCancellationToken))))
-                .ToList();
+            var cancellationToken = engineCancellationTokenSource.Token;
+            var modules = SortModulesByDependencies(_modules.Where(module => module.Enabled).ToArray());
+
+            await InitializeModulesAsync(modules, cancellationToken);
+
+            var moduleTasks = modules
+                .Select(module => RunModuleAsync(module, cancellationToken))
+                .ToArray();
+
+            if (moduleTasks.Length == 0)
+            {
+                _logger.LogWarning("No engine modules are enabled.");
+                return;
+            }
+
+            await Task.WhenAny(moduleTasks);
+
+            if (!cancellationToken.IsCancellationRequested)
+            {
+                _logger.LogCritical("An engine module stopped unexpectedly. Cancelling all modules.");
+                await engineCancellationTokenSource.CancelAsync();
+            }
 
             await Task.WhenAll(moduleTasks);
         }
 
-        private async Task RunModuleLoopAsync(ModuleContext moduleContext)
+        private async Task InitializeModulesAsync(
+            IReadOnlyCollection<IModule> modules,
+            CancellationToken cancellationToken)
         {
-            _logger.LogInformation("{name} starting {supervisorName} execution loop...", moduleContext.Name, nameof(ModuleSupervisor));
-
-            while (!moduleContext.CancellationToken.IsCancellationRequested && moduleContext.Module.Enabled)
+            foreach (var module in modules)
             {
-                try
-                {
-                    await moduleContext.Module.ExecuteAsync(moduleContext.CancellationToken);
-                }
-                catch (Exception ex)
-                {
-                    _logger.LogError(ex, "{Name} crashed. Restarting...", moduleContext.Name);
-                    await Task.Delay(moduleContext.Module.IntervalDelay, moduleContext.CancellationToken);
-                    continue; // restart the loop (revives the module)
-                }
+                _logger.LogInformation("Initializing module {ModuleName}.", module.Name);
+                await module.InitializeAsync(cancellationToken);
+                _logger.LogInformation("Module {ModuleName} initialized.", module.Name);
+            }
+        }
 
-                await Task.Delay(moduleContext.Module.IntervalDelay, moduleContext.CancellationToken);
+        private async Task RunModuleAsync(IModule module, CancellationToken cancellationToken)
+        {
+            _logger.LogInformation("Starting module {ModuleName}.", module.Name);
+
+            try
+            {
+                await module.RunAsync(cancellationToken);
+
+                if (!cancellationToken.IsCancellationRequested)
+                {
+                    throw new InvalidOperationException($"Module '{module.Name}' exited unexpectedly.");
+                }
+            }
+            catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested)
+            {
+                _logger.LogInformation("Module {ModuleName} stopped due to engine cancellation.", module.Name);
+            }
+            catch (Exception exception)
+            {
+                _logger.LogCritical(exception, "Module {ModuleName} failed fatally.", module.Name);
+                throw;
+            }
+        }
+
+        private static IReadOnlyList<IModule> SortModulesByDependencies(IReadOnlyCollection<IModule> modules)
+        {
+            var modulesByType = modules.ToDictionary(module => module.GetType());
+            var sortedModules = new List<IModule>(modules.Count);
+            var visiting = new HashSet<Type>();
+            var visited = new HashSet<Type>();
+
+            foreach (var module in modules)
+            {
+                Visit(module);
             }
 
-            _logger.LogWarning("{name} {supervisorName} execution loop stopped.", moduleContext.Name, nameof(ModuleSupervisor));
+            return sortedModules;
+
+            void Visit(IModule module)
+            {
+                var moduleType = module.GetType();
+
+                if (visited.Contains(moduleType))
+                    return;
+
+                if (!visiting.Add(moduleType))
+                    throw new InvalidOperationException($"A circular module dependency includes '{module.Name}'.");
+
+                foreach (var dependencyType in module.Dependencies)
+                {
+                    if (!modulesByType.TryGetValue(dependencyType, out var dependency))
+                    {
+                        throw new InvalidOperationException(
+                            $"Module '{module.Name}' requires missing or disabled module '{dependencyType.Name}'.");
+                    }
+
+                    Visit(dependency);
+                }
+
+                visiting.Remove(moduleType);
+                visited.Add(moduleType);
+                sortedModules.Add(module);
+            }
         }
     }
 }
