@@ -14,7 +14,7 @@ namespace DidactEngine.Logging
 
         public string Name => EngineConstants.ModuleNames.EngineLogger;
 
-        public bool Enabled { get; set; } = true;
+        public bool Enabled => true;
 
         public IReadOnlyCollection<Type> Dependencies => Array.Empty<Type>();
 

@@ -4,9 +4,7 @@ namespace DidactEngine.Modules
     {
         string Name { get; }
 
-        bool Enabled { get; set; }
-
-        string State { get; set; }
+        bool Enabled { get; }
 
         /// <summary>
         /// Modules that must be initialized before this module can start.

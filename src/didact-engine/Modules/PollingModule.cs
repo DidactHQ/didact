@@ -11,7 +11,7 @@ namespace DidactEngine.Modules
 
         public abstract string Name { get; }
 
-        public virtual bool Enabled => true;
+        public bool Enabled => true;
 
         public virtual IReadOnlyCollection<Type> Dependencies => Array.Empty<Type>();
 
