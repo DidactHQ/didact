@@ -14,11 +14,6 @@ namespace DidactEngine.Modules
         IReadOnlyCollection<Type> Dependencies { get; }
 
         /// <summary>
-        /// Performs bounded startup work and returns when the module is ready to run.
-        /// </summary>
-        Task InitializeAsync(CancellationToken cancellationToken);
-
-        /// <summary>
         /// Runs the module until engine cancellation or an unrecoverable failure.
         /// </summary>
         Task RunAsync(CancellationToken cancellationToken);
