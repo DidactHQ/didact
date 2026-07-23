@@ -1,28 +1,29 @@
-﻿using DidactEngine.Constants;
+using DidactEngine.Constants;
 using DidactEngine.Modules;
+using DidactEngine.Plugins;
 
 namespace DidactEngine.Scheduler
 {
-    public class SchedulerModule : IModule
+    public sealed class SchedulerModule : PollingModule
     {
         private readonly SchedulerService _schedulerService;
 
-        public string Name => EngineConstants.ModuleNames.Scheduler;
-
-        public bool Enabled { get; set; } = true;
-
-        public int Concurrency { get; set; } = 1;
-
-        public int IntervalDelay { get; set; } = Defaults.DefaultModuleIntervalDelays.Scheduler;
-
-        public SchedulerModule(SchedulerService schedulerService)
+        public SchedulerModule(SchedulerService schedulerService, ILogger<SchedulerModule> logger)
+            : base(logger)
         {
             _schedulerService = schedulerService;
         }
 
-        public async Task ExecuteAsync(CancellationToken cancellationToken)
+        public override string Name => EngineConstants.ModuleNames.Scheduler;
+
+        public override IReadOnlyCollection<Type> Dependencies => new[] { typeof(PluginsModule) };
+
+        public override TimeSpan PollingInterval =>
+            TimeSpan.FromMilliseconds(Defaults.DefaultModuleIntervalDelays.Scheduler);
+
+        protected override Task PollAsync(CancellationToken cancellationToken)
         {
-            await _schedulerService.ScheduleAsync(cancellationToken);
+            return _schedulerService.ScheduleAsync(cancellationToken);
         }
     }
 }

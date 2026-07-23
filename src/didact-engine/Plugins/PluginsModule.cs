@@ -1,24 +1,22 @@
-﻿using DidactEngine.Constants;
+using DidactEngine.Constants;
 using DidactEngine.Modules;
 
 namespace DidactEngine.Plugins
 {
-    public class PluginsModule : IModule
+    public sealed class PluginsModule : PollingModule
     {
-        public string Name => EngineConstants.ModuleNames.Plugins;
-
-        public bool Enabled { get; set; } = true;
-
-        public int Concurrency { get; set; } = 1;
-
-        public int IntervalDelay { get; set; } = Defaults.DefaultModuleIntervalDelays.Plugins;
-
-        public PluginsModule() { }
-
-        public async Task ExecuteAsync(CancellationToken ct)
+        public PluginsModule(ILogger<PluginsModule> logger)
+            : base(logger)
         {
-            // TODO
+        }
 
+        public override string Name => EngineConstants.ModuleNames.Plugins;
+
+        public override TimeSpan PollingInterval =>
+            TimeSpan.FromMilliseconds(Defaults.DefaultModuleIntervalDelays.Plugins);
+
+        protected override Task PollAsync(CancellationToken cancellationToken)
+        {
             /* Implementation
              * Step 1: Poll database for missing deployments.
              * Step 2: Fetch each deployment.
@@ -28,7 +26,7 @@ namespace DidactEngine.Plugins
              * Step 6: Run ConfigureAsync against all flows.
              */
 
-            await Task.CompletedTask;
+            return Task.CompletedTask;
         }
     }
 }

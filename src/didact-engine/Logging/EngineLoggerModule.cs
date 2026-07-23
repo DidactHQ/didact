@@ -1,28 +1,26 @@
-﻿using DidactEngine.Constants;
+using DidactEngine.Constants;
 using DidactEngine.Modules;
 
 namespace DidactEngine.Logging
 {
-    public class EngineLoggerModule : IModule
+    public sealed class EngineLoggerModule : ILongRunningModule
     {
         private readonly EngineLogChannel _engineChannel;
-
-        public string Name => EngineConstants.ModuleNames.EngineLogger;
-
-        public bool Enabled { get; set; } = true;
-
-        public int Concurrency { get; set; } = 1;
-
-        public int IntervalDelay { get; set; } = Defaults.DefaultModuleIntervalDelays.EngineLogger;
 
         public EngineLoggerModule(EngineLogChannel channel)
         {
             _engineChannel = channel;
         }
 
-        public async Task ExecuteAsync(CancellationToken token)
+        public string Name => EngineConstants.ModuleNames.EngineLogger;
+
+        public bool Enabled => true;
+
+        public IReadOnlyCollection<Type> Dependencies => Array.Empty<Type>();
+
+        public async Task RunAsync(CancellationToken cancellationToken)
         {
-            await foreach (var log in _engineChannel.Channel.Reader.ReadAllAsync(token))
+            await foreach (var log in _engineChannel.Channel.Reader.ReadAllAsync(cancellationToken))
             {
                 // TODO Implement Serilog or other logging utilities.
             }
