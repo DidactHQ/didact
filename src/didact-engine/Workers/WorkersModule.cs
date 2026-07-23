@@ -25,11 +25,6 @@ namespace DidactEngine.Workers
         public IReadOnlyCollection<Type> Dependencies =>
             new[] { typeof(PluginsModule), typeof(FlowRunLoggerModule) };
 
-        public Task InitializeAsync(CancellationToken cancellationToken)
-        {
-            return Task.CompletedTask;
-        }
-
         public async Task RunAsync(CancellationToken cancellationToken)
         {
             _logger.LogInformation("Starting {WorkerCount} worker loops.", WorkerCount);

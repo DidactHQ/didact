@@ -17,11 +17,6 @@ namespace DidactEngine.Modules
 
         public abstract TimeSpan PollingInterval { get; }
 
-        public virtual Task InitializeAsync(CancellationToken cancellationToken)
-        {
-            return Task.CompletedTask;
-        }
-
         public async Task RunAsync(CancellationToken cancellationToken)
         {
             _logger.LogInformation("Polling module {ModuleName} started.", Name);

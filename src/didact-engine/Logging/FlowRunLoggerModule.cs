@@ -20,11 +20,6 @@ namespace DidactEngine.Logging
 
         public IReadOnlyCollection<Type> Dependencies => Array.Empty<Type>();
 
-        public Task InitializeAsync(CancellationToken cancellationToken)
-        {
-            return Task.CompletedTask;
-        }
-
         public async Task RunAsync(CancellationToken cancellationToken)
         {
             await foreach (var log in _flowRunLogChannel.Channel.Reader.ReadAllAsync(cancellationToken))

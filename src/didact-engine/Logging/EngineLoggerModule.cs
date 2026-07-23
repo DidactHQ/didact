@@ -14,14 +14,9 @@ namespace DidactEngine.Logging
 
         public string Name => EngineConstants.ModuleNames.EngineLogger;
 
-        public bool Enabled => true;
+        public bool Enabled { get; set; } = true;
 
         public IReadOnlyCollection<Type> Dependencies => Array.Empty<Type>();
-
-        public Task InitializeAsync(CancellationToken cancellationToken)
-        {
-            return Task.CompletedTask;
-        }
 
         public async Task RunAsync(CancellationToken cancellationToken)
         {
