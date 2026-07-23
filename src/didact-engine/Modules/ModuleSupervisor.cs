@@ -7,12 +7,18 @@ namespace DidactEngine.Modules
         private readonly ILogger<ModuleSupervisor> _logger;
         private readonly IReadOnlyCollection<IModule> _modules;
         private readonly IEngineService _engineService;
+        private readonly Dictionary<IModule, ModuleStatus> _moduleStatuses;
 
         public ModuleSupervisor(IEnumerable<IModule> modules, ILogger<ModuleSupervisor> logger, IEngineService engineService)
         {
             _modules = modules.ToArray();
             _logger = logger;
             _engineService = engineService;
+            _moduleStatuses = [];
+            foreach(var module in _modules)
+            {
+                _moduleStatuses.Add(module, new ModuleStatus(module));
+            }
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -23,8 +29,6 @@ namespace DidactEngine.Modules
 
             var cancellationToken = engineCancellationTokenSource.Token;
             var modules = SortModulesByDependencies(_modules.Where(module => module.Enabled).ToArray());
-
-            await InitializeModulesAsync(modules, cancellationToken);
 
             var moduleTasks = modules
                 .Select(module => RunModuleAsync(module, cancellationToken))
@@ -45,18 +49,6 @@ namespace DidactEngine.Modules
             }
 
             await Task.WhenAll(moduleTasks);
-        }
-
-        private async Task InitializeModulesAsync(
-            IReadOnlyCollection<IModule> modules,
-            CancellationToken cancellationToken)
-        {
-            foreach (var module in modules)
-            {
-                _logger.LogInformation("Initializing module {ModuleName}.", module.Name);
-                await module.InitializeAsync(cancellationToken);
-                _logger.LogInformation("Module {ModuleName} initialized.", module.Name);
-            }
         }
 
         private async Task RunModuleAsync(IModule module, CancellationToken cancellationToken)
