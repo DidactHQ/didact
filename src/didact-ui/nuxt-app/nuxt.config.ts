@@ -11,6 +11,13 @@ export default defineNuxtConfig({
       tailwindcss(),
     ],
   },
+  imports: {
+    dirs: [
+      // Scan top-level files and all nested files within subfolders
+      'composables',
+      'composables/**'
+    ]
+  },
   ssr: false,
   nitro: {
     output: {
