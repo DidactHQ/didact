@@ -76,7 +76,6 @@
 </template>
 
 <script setup lang="ts">
-import { Calendar, Home, Inbox, Search, Settings } from 'lucide-vue-next'
 import { useSidebar } from './ui/sidebar';
 const { open } = useSidebar();
 const { items } = useSidebarData();
