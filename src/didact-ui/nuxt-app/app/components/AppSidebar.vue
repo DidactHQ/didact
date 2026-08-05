@@ -19,7 +19,6 @@
             <SidebarMenuItem v-for="item in items" :key="item.title">
               <SidebarMenuButton as-child :is-active="isActiveRoute(item.path)">
                 <NuxtLink :to="item.path">
-                  <!-- <component :is="item.icon" /> -->
                   <img :src="'/' + item.iconFilename" width="17" height="17" />
                   <span>{{ item.title }}</span>
                 </NuxtLink>
@@ -80,6 +79,7 @@
 import { Calendar, Home, Inbox, Search, Settings } from 'lucide-vue-next'
 import { useSidebar } from './ui/sidebar';
 const { open } = useSidebar();
+const { items } = useSidebarData();
 const route = useRoute();
 
 const isActiveRoute = (path: string) => {
@@ -88,62 +88,4 @@ const isActiveRoute = (path: string) => {
   
   return route.path.includes(path);
 }
-
-// Menu items.
-const items = [
-  {
-    title: 'Dashboard',
-    path: '/',
-    icon: Home,
-    iconFilename: 'dashboard-icon.png'
-  },
-  {
-    title: 'Flows',
-    path: '/flows',
-    icon: Inbox,
-    iconFilename: 'flows-icon.png'
-  },
-  {
-    title: 'Flowruns',
-    path: '/flowruns',
-    icon: Calendar,
-    iconFilename: 'flow-runs-icon.png'
-  },
-  {
-    title: 'Deployments',
-    path: '/deployments',
-    icon: Search,
-    iconFilename: 'deployments-icon.png'
-  },
-  {
-    title: 'Queues',
-    path: '/queues',
-    icon: Search,
-    iconFilename: 'queues-icon.png'
-  },
-  {
-    title: 'Engines',
-    path: '/engines',
-    icon: Search,
-    iconFilename: 'engines-icon.png'
-  },
-  {
-    title: 'Variables',
-    path: '/variables',
-    icon: Search,
-    iconFilename: 'variables-icon.png'
-  },
-  {
-    title: 'Secrets',
-    path: '/secrets',
-    icon: Settings,
-    iconFilename: 'secrets-icon.png'
-  },
-  {
-    title: 'Alerts',
-    path: '/alerts',
-    icon: Settings,
-    iconFilename: 'alerts-icon.png'
-  }
-]
 </script>
